@@ -1,0 +1,16 @@
+[## Eclipse~~hbx]
+
+Preferences > Java > Code Style > Formatter
+Edit버튼 클릭
+
+Whitespace > Declarations > Constructors > 
+Before opening brace
+
+New Lines > In control statements >
+Before 'else' in an 'if' statement
+Before 'catch' in an 'try' statement
+Before 'finally' in an 'try' statement
+Before 'while' in an 'do' statement
+
+Indentation > Indented elements >
+Statements within 'switch' body
