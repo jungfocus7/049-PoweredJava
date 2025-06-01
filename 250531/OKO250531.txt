@@ -6,8 +6,12 @@
 (SELECT\b\s+?)[\s\S]+?(FROM\b\s+?)[\s\S]+?;\s*?(--.*?)*?$
 
 
-03) 많이 디테일 (유력)
+03) 많이 디테일
 ^[\t ]*?(SELECT\b\s+?)[\s\S]+?(FROM\b\s+?)[\s\S]+?;\s*?(--.*?)*?$
+
+
+04) 확정
+^[\t ]*?SELECT\b\s+[\s\S]+?\bFROM\b\s+[\s\S]+?;[\t ]*?(?:--.*)?$
 
 
 
@@ -573,3 +577,152 @@ Twitter
 LinkedIn
 Instagram
 Site design / logo © 2025 Stack Exchange Inc; user contributions licensed under CC BY-SA . rev 2025.5.30.27971
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+오라클에서 길고 복잡한 서브쿼리 샘플을 만들어 드리겠습니다. 여러 가지 서브쿼리 유형(스칼라 서브쿼리, 인라인 뷰, 상관 서브쿼리, 다중 컬럼 서브쿼리 등)을 조합하여 실제 업무에서 발생할 수 있는 시나리오를 가정했습니다.
+SELECT 'DDD;' AS MSG FROM USER;
+시나리오:
+
+http://www.forta.com
+https://mail.forta.com
+ftp://ftp.forta.com
+
+가상의 회사에서 EMPLOYEES, DEPARTMENTS, JOBS, LOCATIONS, SALARY_HISTORY 테이블이 있다고 가정합니다. 목표는 다음 정보를 조회하는 것입니다.
+
+SELECT
+
+각 부서에서 가장 높은 급여를 받는 직원 정보
+해당 직원이 과거에 받은 급여 내역 (가장 최근 급여 대비 증감률 포함)
+직원이 속한 부서의 평균 급여와 해당 직원의 급여가 부서 평균 대비 얼마나 차이나는지
+같은 직무를 가진 다른 직원들의 평균 급여
+직원이 위치한 도시와 해당 도시의 다른 부서들의 평균 급여
+샘플 쿼리:
+
+SQL
+
+;
+
+  SELECT
+    e.employee_id,
+    e.first_name,
+    e.last_name,
+    e.email,
+    e.phone_number,
+    e.hire_date,
+    e.salary,
+    j.job_title,
+    d.department_name,
+    l.city AS employee_city,
+    -- 1. 스칼라 서브쿼리: 각 부서의 최고 급여 조회
+    (SELECT MAX(e2.salary)
+     FROM employees e2
+     WHERE e2.department_id = e.department_id) AS department_max_salary,
+    -- 2. 인라인 뷰: 각 부서의 평균 급여와 직원 급여와의 차이 계산
+    (SELECT department_avg_salary
+     FROM (
+         SELECT
+             d2.department_id,
+             AVG(e3.salary) AS department_avg_salary
+         FROM
+             departments d2
+         JOIN
+             employees e3 ON d2.department_id = e3.department_id
+         GROUP BY
+             d2.department_id
+     ) dept_avg
+     WHERE dept_avg.department_id = e.department_id
+    ) AS current_department_avg_salary,
+    e.salary - (SELECT AVG(e4.salary) FROM employees e4 WHERE e4.department_id = e.department_id) AS salary_vs_dept_avg,
+    -- 3. 상관 서브쿼리: 동일 직무를 가진 다른 직원들의 평균 급여
+    (SELECT AVG(e5.salary)
+     FROM employees e5
+     WHERE e5.job_id = e.job_id
+       AND e5.employee_id != e.employee_id) AS average_salary_for_same_job,
+    -- 4. 다중 컬럼 서브쿼리와 IN 연산자: 특정 조건을 만족하는 과거 급여 내역 (가장 최근 급여 대비 증감률 포함)
+    (SELECT LISTAGG(sh.salary_date || ':' || sh.salary_amount ||
+                     ' (Change: ' ||
+                     TO_CHAR(ROUND(((sh.salary_amount - e.salary) / e.salary) * 100, 2)) || '%)',
+                     '; ') WITHIN GROUP (ORDER BY sh.salary_date DESC)
+     FROM salary_history sh
+     WHERE (sh.employee_id, sh.salary_date) IN (
+         SELECT employee_id, salary_date
+         FROM (
+             SELECT
+                 sh2.employee_id,
+                 sh2.salary_date,
+                 sh2.salary_amount,
+                 ROW_NUMBER() OVER (PARTITION BY sh2.employee_id ORDER BY sh2.salary_date DESC) as rn
+             FROM
+                 salary_history sh2
+             WHERE
+                 sh2.employee_id = e.employee_id -- 현재 직원의 과거 급여 내역만
+         )
+         WHERE rn <= 3 -- 최근 3개의 급여 내역
+     )
+    ) AS recent_salary_history_with_change,
+    -- 5. 중첩된 인라인 뷰와 그룹화: 직원이 위치한 도시의 다른 부서들의 평균 급여
+    (SELECT AVG(dept_location_avg.location_dept_avg_salary)
+     FROM (
+         SELECT
+             d3.location_id,
+             d3.department_id,
+             AVG(e6.salary) AS location_dept_avg_salary
+         FROM
+             departments d3
+         JOIN
+             employees e6 ON d3.department_id = e6.department_id
+         GROUP BY
+             d3.location_id, d3.department_id
+     ) dept_location_avg
+     WHERE dept_location_avg.location_id = l.location_id
+       AND dept_location_avg.department_id != e.department_id -- 현재 직원의 부서를 제외한 다른 부서
+    ) AS avg_salary_other_depts_in_city
+FROM
+    employees e
+JOIN
+    departments d ON e.department_id = d.department_id
+JOIN
+    jobs j ON e.job_id = j.job_id
+JOIN
+    locations l ON d.location_id = l.location_id
+WHERE
+    e.employee_id IN (
+        -- 각 부서별 최고 급여를 받는 직원들만 선택하는 서브쿼리
+        SELECT
+            e_max.employee_id
+        FROM
+            employees e_max
+        WHERE
+            (e_max.department_id, e_max.salary) IN (
+                SELECT
+                    department_id,
+                    MAX(salary)
+                FROM
+                    employees
+                GROUP BY
+                    department_id
+            )
+    )
+ORDER BY
+    d.department_name, e.salary DESC;
