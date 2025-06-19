@@ -21,4 +21,20 @@ public final class StringHelper {
 			return str;
 		}
 	}
+
+	public static String leftPad(String str, int tw, char pc) {
+		char[] cha = new char[tw];
+		int i = cha.length, j = str.length();
+		while (--i >= 0) {
+			if (--j >= 0) {
+				cha[i] = str.charAt(j);
+			}
+			else {
+				cha[i] = pc;
+			}
+		}
+
+		String rs = new String(cha);
+		return rs;
+	}
 }

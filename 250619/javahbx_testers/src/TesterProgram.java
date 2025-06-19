@@ -1,12 +1,28 @@
 public final class TesterProgram {
+	private static void println(String txt) {
+		System.out.println(txt);
+	}
+
 	public static void main(String[] args) {
+		String str = "";
+		int tw = 3;
+		char pc = '#';
+
+		char[] cha = new char[tw];
+		int i = cha.length, j = str.length();
+		while (--i >= 0) {
+			if (--j >= 0) {
+				cha[i] = str.charAt(j);
+			}
+			else {
+				cha[i] = pc;
+			}
+		}
+
+		String rs = new String(cha);
+		println(">>> " + rs);
 	}
 }
-
-
-
-
-
 
 //class UserInfo {
 //	public UserInfo(String p_name) {
