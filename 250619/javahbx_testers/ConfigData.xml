@@ -1,0 +1,9 @@
+<root>
+	<userInfo email="inoff79@daum.net" name="임헌진" age="37"/>
+	<query name="경기 데이터 조회">
+<![CDATA[
+SELECT * FROM USER_INFO
+WHERE 1=1 
+]]>
+	</query>
+</root>
