@@ -1,26 +1,87 @@
+import hbx.helpers.StringHelper;
+
 public final class TesterProgram {
 	private static void println(String txt) {
 		System.out.println(txt);
 	}
 
+
+	private static void testStringHelper() {
+		boolean br;
+
+		br = StringHelper.isEmpty(null);
+		println("StringHelper.isEmpty(null) >>> " + br);
+		br = StringHelper.isEmpty(StringHelper.empty);
+		println("StringHelper.isEmpty(StringHelper.empty) >>> " + br);
+		br = StringHelper.isEmpty("박종명");
+		println("StringHelper.isEmpty(\"박종명\") >>> " + br);
+		br = StringHelper.isEmpty("  ");
+		println("StringHelper.isEmpty(\"  \") >>> " + br);
+		println("============================================================");
+
+		br = StringHelper.isNotEmpty(null);
+		println("StringHelper.isNotEmpty(null) >>> " + br);
+		br = StringHelper.isNotEmpty(StringHelper.empty);
+		println("StringHelper.isNotEmpty(StringHelper.empty) >>> " + br);
+		br = StringHelper.isNotEmpty("박종명");
+		println("StringHelper.isNotEmpty(\"박종명\") >>> " + br);
+		br = StringHelper.isNotEmpty("  ");
+		println("StringHelper.isNotEmpty(\"  \") >>> " + br);
+		println("============================================================");
+
+		br = StringHelper.checkEmpty(null);
+		println("StringHelper.checkEmpty(null) >>> " + br);
+		br = StringHelper.checkEmpty(StringHelper.empty);
+		println("StringHelper.checkEmpty(StringHelper.empty) " + br);
+		br = StringHelper.checkEmpty("박종명");
+		println("StringHelper.checkEmpty(\"박종명\") " + br);
+		br = StringHelper.checkEmpty("  ");
+		println("StringHelper.checkEmpty(\"  \") " + br);
+		println("============================================================");
+
+		br = StringHelper.checkNotEmpty(null);
+		println("StringHelper.checkNotEmpty(null) >>> " + br);
+		br = StringHelper.checkNotEmpty(StringHelper.empty);
+		println("StringHelper.checkNotEmpty(StringHelper.empty) >>> " + br);
+		br = StringHelper.checkNotEmpty("박종명");
+		println("StringHelper.checkNotEmpty(\"박종명\") >>> " + br);
+		br = StringHelper.checkNotEmpty("  ");
+		println("StringHelper.checkNotEmpty(\"  \") >>> " + br);
+		println("============================================================");
+
+
+		String rst;
+
+		rst = StringHelper.padLeft("321", 5, 'x');
+		println("StringHelper.padLeft(\"321\", 5, 'x') >>> " + rst);
+		rst = StringHelper.padLeft("abcdefg", 10, '0');
+		println("StringHelper.padLeft(\"abcdefg\", 10, '0') >>> " + rst);
+		rst = StringHelper.padLeft("0123456789", 7, '#');
+		println("StringHelper.padLeft(\"0123456789\", 7, '#') >>> " + rst);
+	}
+
+
 	public static void main(String[] args) {
-		String str = "";
-		int tw = 3;
-		char pc = '#';
+		testStringHelper();
 
-		char[] cha = new char[tw];
-		int i = cha.length, j = str.length();
-		while (--i >= 0) {
-			if (--j >= 0) {
-				cha[i] = str.charAt(j);
-			}
-			else {
-				cha[i] = pc;
-			}
-		}
 
-		String rs = new String(cha);
-		println(">>> " + rs);
+//		String str = "";
+//		int tw = 3;
+//		char pc = '#';
+//
+//		char[] cha = new char[tw];
+//		int i = cha.length, j = str.length();
+//		while (--i >= 0) {
+//			if (--j >= 0) {
+//				cha[i] = str.charAt(j);
+//			}
+//			else {
+//				cha[i] = pc;
+//			}
+//		}
+//
+//		String rs = new String(cha);
+//		println(">>> " + rs);
 	}
 }
 
