@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.text.MessageFormat;
 
 import hbx.dataLoaders.ConfigDataLoader;
@@ -91,8 +92,18 @@ public final class TesterProgram {
 
 		testConfigDataLoader();
 
+
+		testTemper();
 	}
 
+
+
+
+
+	private static void testTemper() {
+		int l = Array.getLength(new String[] { "박종명" });
+		println(">>> " + l);
+	}
 }
 
 
