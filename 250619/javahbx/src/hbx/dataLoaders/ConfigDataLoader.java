@@ -1,6 +1,8 @@
 package hbx.dataLoaders;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -12,6 +14,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import hbx.helpers.DebugHelper;
+import hbx.helpers.SystemHelper;
 
 
 public final class ConfigDataLoader {
@@ -30,11 +33,14 @@ public final class ConfigDataLoader {
 			DocumentBuilder db = dbf.newDocumentBuilder();
 
 			File file = new File(_cdfp);
-			_xdoc = db.parse(file);
+			InputStream ips = new FileInputStream(file);
+			_xdoc = db.parse(ips);
 			_xdoc.getDocumentElement().normalize();
 
 			XPathFactory xpf = XPathFactory.newDefaultInstance();
 			_xpath = xpf.newXPath();
+
+			SystemHelper.close(ips);
 
 			br = true;
 		}
@@ -56,7 +62,7 @@ public final class ConfigDataLoader {
 
 		return el;
 	}
-	
+
 	public static String getAttribute(String expr, String name) {
 		String rv = null;
 
@@ -67,7 +73,7 @@ public final class ConfigDataLoader {
 
 		return rv;
 	}
-	
+
 	public static String getTextContent(String expr, boolean bt) {
 		String rv = null;
 
@@ -82,6 +88,6 @@ public final class ConfigDataLoader {
 		}
 
 		return rv;
-	}	
+	}
 
 }

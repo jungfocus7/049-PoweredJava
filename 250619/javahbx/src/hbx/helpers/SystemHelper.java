@@ -4,8 +4,8 @@ import java.io.Closeable;
 import java.io.IOException;
 
 
-public final class GCHelper {
-	private GCHelper() { }
+public final class SystemHelper {
+	private SystemHelper() { }
 
 	public static void gc() {
 		System.gc();
