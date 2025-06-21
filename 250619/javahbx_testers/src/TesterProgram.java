@@ -1,8 +1,8 @@
 import java.text.MessageFormat;
 
 import hbx.dataLoaders.ConfigDataLoader;
-import hbx.helpers.DebugHelper;
 import hbx.helpers.StringHelper;
+
 
 public final class TesterProgram {
 	private static void println(String txt) {
@@ -10,7 +10,7 @@ public final class TesterProgram {
 	}
 
 	private static void printlineSeparator() {
-		println("============================================================");
+		println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		println(System.lineSeparator());
 	}
 

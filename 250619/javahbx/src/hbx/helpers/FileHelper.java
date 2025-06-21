@@ -3,7 +3,7 @@ package hbx.helpers;
 import java.io.PrintWriter;
 
 
-public final class CommonHelper {
+public final class FileHelper {
 	public static boolean writeAllText(String filePath, String txt) {
 		boolean br = false;
 

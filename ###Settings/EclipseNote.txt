@@ -22,3 +22,11 @@ Preferences > Java > Editor > Syntax Coloring
 # 저장시 공백 깔끔하게 제거
 Preferences > Java > Editor > Save Actions >
 Addtional actions > Configuration > Remove trailing whitespace > All lines
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ArrayList<String>, HashSet<String>, HashMap<String>
