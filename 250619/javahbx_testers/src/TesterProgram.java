@@ -1,3 +1,7 @@
+import java.text.MessageFormat;
+
+import hbx.dataLoaders.ConfigDataLoader;
+import hbx.helpers.DebugHelper;
 import hbx.helpers.StringHelper;
 
 public final class TesterProgram {
@@ -5,6 +9,10 @@ public final class TesterProgram {
 		System.out.println(txt);
 	}
 
+	private static void printlineSeparator() {
+		println("============================================================");
+		println(System.lineSeparator());
+	}
 
 	private static void testStringHelper() {
 		boolean br;
@@ -17,7 +25,7 @@ public final class TesterProgram {
 		println("StringHelper.isEmpty(\"박종명\") >>> " + br);
 		br = StringHelper.isEmpty("  ");
 		println("StringHelper.isEmpty(\"  \") >>> " + br);
-		println("============================================================");
+		printlineSeparator();
 
 		br = StringHelper.isNotEmpty(null);
 		println("StringHelper.isNotEmpty(null) >>> " + br);
@@ -27,7 +35,7 @@ public final class TesterProgram {
 		println("StringHelper.isNotEmpty(\"박종명\") >>> " + br);
 		br = StringHelper.isNotEmpty("  ");
 		println("StringHelper.isNotEmpty(\"  \") >>> " + br);
-		println("============================================================");
+		printlineSeparator();
 
 		br = StringHelper.checkEmpty(null);
 		println("StringHelper.checkEmpty(null) >>> " + br);
@@ -37,7 +45,7 @@ public final class TesterProgram {
 		println("StringHelper.checkEmpty(\"박종명\") " + br);
 		br = StringHelper.checkEmpty("  ");
 		println("StringHelper.checkEmpty(\"  \") " + br);
-		println("============================================================");
+		printlineSeparator();
 
 		br = StringHelper.checkNotEmpty(null);
 		println("StringHelper.checkNotEmpty(null) >>> " + br);
@@ -47,7 +55,7 @@ public final class TesterProgram {
 		println("StringHelper.checkNotEmpty(\"박종명\") >>> " + br);
 		br = StringHelper.checkNotEmpty("  ");
 		println("StringHelper.checkNotEmpty(\"  \") >>> " + br);
-		println("============================================================");
+		printlineSeparator();
 
 
 		String rst;
@@ -58,13 +66,53 @@ public final class TesterProgram {
 		println("StringHelper.padLeft(\"abcdefg\", 10, '0') >>> " + rst);
 		rst = StringHelper.padLeft("0123456789", 7, '#');
 		println("StringHelper.padLeft(\"0123456789\", 7, '#') >>> " + rst);
+		printlineSeparator();
 	}
 
+	private static void testConfigDataLoader() {
+		if (ConfigDataLoader.load()) {
+			String email = ConfigDataLoader.getAttribute("//userInfo", "email");
+			String name = ConfigDataLoader.getAttribute("//userInfo", "name");
+			String age = ConfigDataLoader.getAttribute("//userInfo", "age");
+			String query = ConfigDataLoader.getTextContent("//query", true);
+			String msg = MessageFormat.format(
+					"email: {0}, name: {1}, age: {2}, query: {3}"
+					, email, name, age, query);
+			println(msg);
+			printlineSeparator();
+
+	//		Element l_el = XmlDataLoader.get_userInfo();
+	//		println(">>>>");
+		}
+	}
 
 	public static void main(String[] args) {
 		testStringHelper();
 
+		testConfigDataLoader();
 
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 //		String str = "";
 //		int tw = 3;
 //		char pc = '#';
@@ -82,8 +130,14 @@ public final class TesterProgram {
 //
 //		String rs = new String(cha);
 //		println(">>> " + rs);
-	}
-}
+
+
+
+
+
+
+ */
+
 
 //class UserInfo {
 //	public UserInfo(String p_name) {

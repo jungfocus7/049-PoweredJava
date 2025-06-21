@@ -14,3 +14,11 @@ Before 'while' in an 'do' statement
 
 Indentation > Indented elements >
 Statements within 'switch' body
+
+
+# 코드에서 이탤리체등 해제하기
+Preferences > Java > Editor > Syntax Coloring
+
+# 저장시 공백 깔끔하게 제거
+Preferences > Java > Editor > Save Actions >
+Addtional actions > Configuration > Remove trailing whitespace > All lines
