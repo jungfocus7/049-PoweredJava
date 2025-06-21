@@ -13,53 +13,31 @@ import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import hbx.core.Clearable;
 import hbx.helpers.DebugHelper;
 import hbx.helpers.SystemHelper;
 
 
-public class ConfigDataLoader implements Clearable {
-	private String _cdfp;
-	private Document _xdoc;
-	private XPath _xpath;
+public final class ConfigDataLoader {
+	private final static String _cdfp = ".\\ConfigData.xml";
+	private static Document _xdoc;
+	private static XPath _xpath;
 
-	public ConfigDataLoader(String cdfp) {
-		_cdfp = cdfp;
-	}
-
-	public String getConfigDataFilePath() {
-		return _cdfp;
-	}
-
-	public Document getDocument() {
-		return _xdoc;
-	}
-
-	public boolean checkLoaded() {
+	public static boolean checkLoaded() {
 		return _xdoc != null;
 	}
 
-	public boolean load() {
+	public static boolean load() {
 		boolean br = false;
-
-		DocumentBuilderFactory dbf;
-		DocumentBuilder db;
-
-		File file;
-		InputStream ips = null;
-
-		XPathFactory xpf;
-
 		try {
-			dbf = DocumentBuilderFactory.newDefaultInstance();
-			db = dbf.newDocumentBuilder();
+			DocumentBuilderFactory dbf = DocumentBuilderFactory.newDefaultInstance();
+			DocumentBuilder db = dbf.newDocumentBuilder();
 
-			file = new File(_cdfp);
-			ips = new FileInputStream(file);
+			File file = new File(_cdfp);
+			InputStream ips = new FileInputStream(file);
 			_xdoc = db.parse(ips);
 			_xdoc.getDocumentElement().normalize();
 
-			xpf = XPathFactory.newDefaultInstance();
+			XPathFactory xpf = XPathFactory.newDefaultInstance();
 			_xpath = xpf.newXPath();
 
 			SystemHelper.close(ips);
@@ -69,14 +47,11 @@ public class ConfigDataLoader implements Clearable {
 		catch (Exception ex) {
 			DebugHelper.println(ex.getMessage());
 		}
-		finally {
-			SystemHelper.close(ips);
-		}
 
 		return br;
 	}
 
-	public Element findElement(String expr) {
+	public static Element findElement(String expr) {
 		Element el = null;
 		try {
 			el = (Element)_xpath.evaluate(expr, _xdoc, XPathConstants.NODE);
@@ -88,7 +63,7 @@ public class ConfigDataLoader implements Clearable {
 		return el;
 	}
 
-	public String getAttribute(String expr, String name) {
+	public static String getAttribute(String expr, String name) {
 		String rv = null;
 
 		Element el = findElement(expr);
@@ -99,7 +74,7 @@ public class ConfigDataLoader implements Clearable {
 		return rv;
 	}
 
-	public String getTextContent(String expr, boolean bt) {
+	public static String getTextContent(String expr, boolean bt) {
 		String rv = null;
 
 		Element el = findElement(expr);
@@ -113,15 +88,6 @@ public class ConfigDataLoader implements Clearable {
 		}
 
 		return rv;
-	}
-
-	@Override
-	public void clear() {
-		if (_cdfp != null) {
-			_cdfp = null;
-			_xdoc = null;
-			_xpath = null;
-		}
 	}
 
 }

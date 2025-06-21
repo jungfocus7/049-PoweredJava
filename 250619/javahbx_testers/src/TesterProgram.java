@@ -71,11 +71,12 @@ public final class TesterProgram {
 	}
 
 	private static void testConfigDataLoader() {
-		if (ConfigDataLoader.load()) {
-			String email = ConfigDataLoader.getAttribute("//userInfo", "email");
-			String name = ConfigDataLoader.getAttribute("//userInfo", "name");
-			String age = ConfigDataLoader.getAttribute("//userInfo", "age");
-			String query = ConfigDataLoader.getTextContent("//query", true);
+		ConfigDataLoader cdl = new ConfigDataLoader(".\\ConfigData.xml");
+		if (cdl.load()) {
+			String email = cdl.getAttribute("//userInfo", "email");
+			String name = cdl.getAttribute("//userInfo", "name");
+			String age = cdl.getAttribute("//userInfo", "age");
+			String query = cdl.getTextContent("//query", true);
 			String msg = MessageFormat.format(
 					"email: {0}, name: {1}, age: {2}, query: {3}"
 					, email, name, age, query);
@@ -85,6 +86,8 @@ public final class TesterProgram {
 	//		Element l_el = XmlDataLoader.get_userInfo();
 	//		println(">>>>");
 		}
+
+		cdl.clear();
 	}
 
 	public static void main(String[] args) {
