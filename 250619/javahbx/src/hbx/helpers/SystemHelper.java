@@ -1,7 +1,6 @@
 package hbx.helpers;
 
 import java.io.Closeable;
-import java.io.IOException;
 import java.util.Collection;
 
 import hbx.core.Clearable;
