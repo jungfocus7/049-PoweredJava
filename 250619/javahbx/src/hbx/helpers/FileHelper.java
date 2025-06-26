@@ -4,6 +4,9 @@ import java.io.PrintWriter;
 
 
 public final class FileHelper {
+	private FileHelper() {
+	}
+
 	public static boolean writeAllText(String filePath, String txt) {
 		boolean br = false;
 

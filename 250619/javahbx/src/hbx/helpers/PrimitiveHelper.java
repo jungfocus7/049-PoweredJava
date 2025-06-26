@@ -1,6 +1,9 @@
 package hbx.helpers;
 
 public final class PrimitiveHelper {
+	private PrimitiveHelper() {
+	}
+
 	public static Byte[] toByteArray(byte[] arr) {
 		if ((arr == null) || (arr.length == 0)) {
 			return null;

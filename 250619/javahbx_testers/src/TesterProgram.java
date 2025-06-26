@@ -8,6 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 
 import hbx.dataLoaders.ConfigDataLoader;
+import hbx.helpers.ReflectionHelper;
 import hbx.helpers.StringHelper;
 
 
@@ -96,6 +97,16 @@ public final class TesterProgram {
 		cdl.clear();
 	}
 
+	public static final String PN_NAME = "박종명";
+	public static final String PN_AGE = "37";
+	public static final String PN_EMAIL = "pool61@naver.com";
+	private static final String PN_XXX2 = "pool61@naver.com";
+	public static final String GT_XXX2 = "pool61@naver.com";
+	private static void testReflectionHelper() {
+		List<String> lst = ReflectionHelper.getPublicConstantNames(TesterProgram.class, "PN_");
+		println(">>>");
+	}
+
 	public static void main(String[] args) {
 		/*
 		testStringHelper();
@@ -103,6 +114,13 @@ public final class TesterProgram {
 		testConfigDataLoader();
 
 
+
+		*/
+
+		testReflectionHelper();
+
+
+		/*
 		testTemper();
 
 		testTemper31();
@@ -206,6 +224,7 @@ public final class TesterProgram {
 
 
 	private static void testTemper33() {
+		/*
 		String numstr = "98765432109955331223777";
 		char[] nums = numstr.toCharArray();
 
@@ -233,6 +252,7 @@ public final class TesterProgram {
 //		Arrays.stream(nums).;
 
 		println(">>>");
+		*/
 
 
 
@@ -242,8 +262,8 @@ public final class TesterProgram {
 //                                   .distinct()
 //                                   .toArray();
 
-		Object[] objs = nums;
-		Arrays.stream(objs);
+//		Object[] objs = nums;
+//		Arrays.stream(objs);
 
 	}
 }
