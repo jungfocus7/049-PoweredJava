@@ -18,7 +18,7 @@ import hbx.helpers.DebugHelper;
 import hbx.helpers.SystemHelper;
 
 
-public class ConfigDataLoader implements Clearable {
+public final class ConfigDataLoader implements Clearable {
 	private String _cdfp;
 	private Document _xdoc;
 	private XPath _xpath;

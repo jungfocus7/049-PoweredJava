@@ -40,7 +40,7 @@ public final class StringHelper {
 	}
 
 	/**
-	 * 문자열이 유효한지 확인
+	 * 문자열이 유효한지 확인 (공백제거)
 	 *
 	 * @param str
 	 * @return
@@ -82,7 +82,7 @@ public final class StringHelper {
 		}
 
 		char[] cha = new char[tw];
-		int i = cha.length, j = lw;
+		int i = tw, j = lw;
 		while (--i >= 0) {
 			if (--j >= 0) {
 				cha[i] = str.charAt(j);
@@ -92,7 +92,17 @@ public final class StringHelper {
 			}
 		}
 
-		String rs = new String(cha);
-		return rs;
+		String rst = new String(cha);
+		return rst;
 	}
+
+	public static boolean equals(String str1, String str2) {
+		if (isNotEmpty(str1) && isNotEmpty(str2)) {
+			return str1.equals(str2);
+		}
+		else {
+			return false;
+		}
+	}
+
 }
