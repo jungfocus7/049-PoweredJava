@@ -130,12 +130,27 @@ public final class StringHelper {
 	}
 
 	/**
-	 * 예외발생없는 문자열비교 (문자열이 유효한 경우만)
+	 * 예외 발생없는 문자열이 같은지 비교
 	 * @param str1 문자열
 	 * @param str2 문자열
 	 * @return
 	 */
 	public static boolean equals(String str1, String str2) {
+		if ((str1 != null) && (str2 != null)) {
+			return str1.equals(str2);
+		}
+		else {
+			return (str1 == null) && (str2 == null);
+		}
+	}
+
+	/**
+	 * 예외 발생없는 문자열비교 (문자열이 유효한 경우만)
+	 * @param str1 문자열
+	 * @param str2 문자열
+	 * @return
+	 */
+	public static boolean checkEquals(String str1, String str2) {
 		if (checkEmpty(str1) || checkEmpty(str2)) {
 			return false;
 		}

@@ -72,6 +72,19 @@ public final class TestWork__StringHelper {
 		TesterHelper.println("05 >>> " + br);
 		TesterHelper.printLineSeparator();
 
+
+		br = StringHelper.checkEquals("", "");
+		TesterHelper.println("01 >>> " + br);
+		br = StringHelper.checkEquals(null, null);
+		TesterHelper.println("02 >>> " + br);
+		br = StringHelper.checkEquals("pook61", "pook61");
+		TesterHelper.println("03 >>> " + br);
+		br = StringHelper.checkEquals("inoff79", "");
+		TesterHelper.println("04 >>> " + br);
+		br = StringHelper.checkEquals(null, "inoff79");
+		TesterHelper.println("05 >>> " + br);
+		TesterHelper.printLineSeparator();
+
 	}
 
 	private static void test31() {
