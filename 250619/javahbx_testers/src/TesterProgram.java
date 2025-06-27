@@ -1,5 +1,4 @@
 import java.lang.reflect.Array;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -7,136 +6,60 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 
-import hbx.dataLoaders.ConfigDataLoader;
-import hbx.helpers.ReflectionHelper;
-import hbx.helpers.StringHelper;
+import helpers.TesterHelper;
 
 
 public final class TesterProgram {
-	private static void println(String txt) {
-		System.out.println(txt);
+	public static void main(String[] args) {
+		TestWork__StringHelper.testAll();
+//
+//		TestWork__ReflectionHelper.testAll();
+//
+//		TestWork__ConfigDataLoader.testAll();
+
+
+
+//		testTemper30();
+
+//		testTemper31();
+
+//		testTemper32();
+
+//		testTemper33();
+
+//		testTemper34();
 	}
 
-	private static void printlineSeparator() {
-		println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		println(System.lineSeparator());
-	}
 
-	private static void testStringHelper() {
-		boolean br;
+	private static void testTemper34() {
+//		String txt = "    ";
+//		String txt = "         1   ";
+		String txt = """
 
-		br = StringHelper.isEmpty(null);
-		println("StringHelper.isEmpty(null) >>> " + br);
-		br = StringHelper.isEmpty(StringHelper.empty);
-		println("StringHelper.isEmpty(StringHelper.empty) >>> " + br);
-		br = StringHelper.isEmpty("박종명");
-		println("StringHelper.isEmpty(\"박종명\") >>> " + br);
-		br = StringHelper.isEmpty("  ");
-		println("StringHelper.isEmpty(\"  \") >>> " + br);
-		printlineSeparator();
+1
 
-		br = StringHelper.isNotEmpty(null);
-		println("StringHelper.isNotEmpty(null) >>> " + br);
-		br = StringHelper.isNotEmpty(StringHelper.empty);
-		println("StringHelper.isNotEmpty(StringHelper.empty) >>> " + br);
-		br = StringHelper.isNotEmpty("박종명");
-		println("StringHelper.isNotEmpty(\"박종명\") >>> " + br);
-		br = StringHelper.isNotEmpty("  ");
-		println("StringHelper.isNotEmpty(\"  \") >>> " + br);
-		printlineSeparator();
+				""";
 
-		br = StringHelper.checkEmpty(null);
-		println("StringHelper.checkEmpty(null) >>> " + br);
-		br = StringHelper.checkEmpty(StringHelper.empty);
-		println("StringHelper.checkEmpty(StringHelper.empty) " + br);
-		br = StringHelper.checkEmpty("박종명");
-		println("StringHelper.checkEmpty(\"박종명\") " + br);
-		br = StringHelper.checkEmpty("  ");
-		println("StringHelper.checkEmpty(\"  \") " + br);
-		printlineSeparator();
+		boolean bFind = false;
+		for (int i = 0, l = txt.length(); i < l; i++) {
+			char ch = txt.charAt(i);
+			if (Character.isWhitespace(ch) == false) {
+				bFind = true;
+				break;
+			}
 
-		br = StringHelper.checkNotEmpty(null);
-		println("StringHelper.checkNotEmpty(null) >>> " + br);
-		br = StringHelper.checkNotEmpty(StringHelper.empty);
-		println("StringHelper.checkNotEmpty(StringHelper.empty) >>> " + br);
-		br = StringHelper.checkNotEmpty("박종명");
-		println("StringHelper.checkNotEmpty(\"박종명\") >>> " + br);
-		br = StringHelper.checkNotEmpty("  ");
-		println("StringHelper.checkNotEmpty(\"  \") >>> " + br);
-		printlineSeparator();
-
-
-		String rst;
-
-		rst = StringHelper.padLeft("321", 5, 'x');
-		println("StringHelper.padLeft(\"321\", 5, 'x') >>> " + rst);
-		rst = StringHelper.padLeft("abcdefg", 10, '0');
-		println("StringHelper.padLeft(\"abcdefg\", 10, '0') >>> " + rst);
-		rst = StringHelper.padLeft("0123456789", 7, '#');
-		println("StringHelper.padLeft(\"0123456789\", 7, '#') >>> " + rst);
-		printlineSeparator();
-	}
-
-	private static void testConfigDataLoader() {
-		ConfigDataLoader cdl = new ConfigDataLoader(".\\ConfigData.xml");
-		if (cdl.load()) {
-			String email = cdl.getAttribute("//userInfo", "email");
-			String name = cdl.getAttribute("//userInfo", "name");
-			String age = cdl.getAttribute("//userInfo", "age");
-			String query = cdl.getTextContent("//query", true);
-			String msg = MessageFormat.format(
-					"email: {0}, name: {1}, age: {2}, query: {3}"
-					, email, name, age, query);
-			println(msg);
-			printlineSeparator();
-
-	//		Element l_el = XmlDataLoader.get_userInfo();
-	//		println(">>>>");
+//			TesterHelper.println(">>> " + Character.isWhitespace(System.lineSeparator()));
 		}
 
-		cdl.clear();
-	}
-
-	public static final String PN_NAME = "박종명";
-	public static final String PN_AGE = "37";
-	public static final String PN_EMAIL = "pool61@naver.com";
-	private static final String PN_XXX2 = "pool61@naver.com";
-	public static final String GT_XXX2 = "pool61@naver.com";
-	private static void testReflectionHelper() {
-		List<String> lst = ReflectionHelper.getPublicConstantNames(TesterProgram.class, "PN_");
-		println(">>>");
-	}
-
-	public static void main(String[] args) {
-		/*
-		testStringHelper();
-
-		testConfigDataLoader();
-
-
-
-		*/
-
-		testReflectionHelper();
-
-
-		/*
-		testTemper();
-
-		testTemper31();
-		*/
-
-		testTemper32();
+		TesterHelper.println(">>> " + (bFind == false));
 	}
 
 
-
-
-
-	private static void testTemper() {
+	private static void testTemper30() {
 		int l = Array.getLength(new String[] { "박종명" });
-		println(">>> " + l);
+		TesterHelper.println(">>> " + l);
 	}
+
 
 	private static void testTemper31() {
 //		String name = "박종명";
@@ -175,7 +98,7 @@ public final class TesterProgram {
 		});
 
 
-		println(">>>");
+		TesterHelper.println(">>>");
 
 	}
 
@@ -207,7 +130,7 @@ public final class TesterProgram {
 
 //		Arrays.stream(nums).;
 
-		println(">>>");
+		TesterHelper.println(">>>");
 
 
 

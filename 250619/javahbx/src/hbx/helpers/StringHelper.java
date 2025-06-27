@@ -20,16 +20,6 @@ public final class StringHelper {
 	}
 
 	/**
-	 * 빈 문자열인지 확인 (공백제거)
-	 *
-	 * @param str
-	 * @return
-	 */
-	public static boolean checkEmpty(String str) {
-		return (str == null) || empty.equals(str.trim());
-	}
-
-	/**
 	 * 문자열이 유효한지 확인
 	 *
 	 * @param str
@@ -37,6 +27,16 @@ public final class StringHelper {
 	 */
 	public static boolean isNotEmpty(String str) {
 		return (str != null) && (str.length() > 0);
+	}
+
+	/**
+	 * 빈 문자열인지 확인 (공백제거)
+	 *
+	 * @param str
+	 * @return
+	 */
+	public static boolean checkEmpty(String str) {
+		return (str == null) || empty.equals(str.trim());
 	}
 
 	/**
@@ -50,9 +50,42 @@ public final class StringHelper {
 	}
 
 	/**
+	 * 문자열이 공백이거나 유효하지 않으면 true
+	 *
+	 * @param str 문자열
+	 * @return
+	 */
+	public static boolean isNullOrWhitespace(String str) {
+		if (str == null) {
+			return true;
+		}
+
+		boolean bFind = false;
+		for (int i = 0, l = str.length(); i < l; i++) {
+			char ch = str.charAt(i);
+			if (Character.isWhitespace(ch) == false) {
+				bFind = true;
+				break;
+			}
+		}
+
+		return bFind == false;
+	}
+
+	/**
+	 * 문자열이 유효하면 true
+	 *
+	 * @param str 문자열
+	 * @return
+	 */
+	public static boolean isNotNullOrWhiteSpace(String str) {
+		return isNullOrWhitespace(str) == false;
+	}
+
+	/**
 	 * null을 빈 문자열로
 	 *
-	 * @param str
+	 * @param str 문자열
 	 * @return
 	 */
 	public static String checkNull(String str) {
@@ -65,7 +98,7 @@ public final class StringHelper {
 	}
 
 	/**
-	 *
+	 * 문자열에 왼쪽으로 특정문자 채우기
 	 * @param str 문자열
 	 * @param tw  TotalWidth
 	 * @param pc  PaddingChar
@@ -96,12 +129,18 @@ public final class StringHelper {
 		return rst;
 	}
 
+	/**
+	 * 예외발생없는 문자열비교 (문자열이 유효한 경우만)
+	 * @param str1 문자열
+	 * @param str2 문자열
+	 * @return
+	 */
 	public static boolean equals(String str1, String str2) {
-		if (isNotEmpty(str1) && isNotEmpty(str2)) {
-			return str1.equals(str2);
+		if (checkEmpty(str1) || checkEmpty(str2)) {
+			return false;
 		}
 		else {
-			return false;
+			return str1.trim().equals(str2.trim());
 		}
 	}
 
