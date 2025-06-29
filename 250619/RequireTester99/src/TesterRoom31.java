@@ -1,4 +1,4 @@
-public final class RequireTester {
+public final class TesterRoom31 {
 	private static void println(String txt) {
 		System.out.println(txt);
 	}
