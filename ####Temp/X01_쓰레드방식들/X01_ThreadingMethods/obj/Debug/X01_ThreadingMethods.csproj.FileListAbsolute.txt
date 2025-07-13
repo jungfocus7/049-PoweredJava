@@ -1,0 +1,6 @@
+C:\Users\hb\source\repos\X01_쓰레드방식들\##Debug\X01_ThreadingMethods.exe.config
+C:\Users\hb\source\repos\X01_쓰레드방식들\##Debug\X01_ThreadingMethods.exe
+C:\Users\hb\source\repos\X01_쓰레드방식들\##Debug\X01_ThreadingMethods.pdb
+C:\Users\hb\source\repos\X01_쓰레드방식들\X01_ThreadingMethods\obj\Debug\X01_ThreadingMethods.csproj.CoreCompileInputs.cache
+C:\Users\hb\source\repos\X01_쓰레드방식들\X01_ThreadingMethods\obj\Debug\X01_ThreadingMethods.exe
+C:\Users\hb\source\repos\X01_쓰레드방식들\X01_ThreadingMethods\obj\Debug\X01_ThreadingMethods.pdb
