@@ -32,26 +32,26 @@ zzzzzz
 
 
 
-	private static Thread _trd1;
-	private static Thread _trd2;
-	private static void threadTestLong31() {
-		_trd1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				WorkProxy.test3();
-			}
-		});
-		_trd1.start();
-
-		_trd2 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				WorkProxy.test3();
-			}
-		});
-		_trd2.start();
-
-	}
+//	private static Thread _trd1;
+//	private static Thread _trd2;
+//	private static void threadTestLong31() {
+//		_trd1 = new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				WorkProxy.test3();
+//			}
+//		});
+//		_trd1.start();
+//
+//		_trd2 = new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				WorkProxy.test3();
+//			}
+//		});
+//		_trd2.start();
+//
+//	}
 
 
 	private static volatile boolean _isLoop = true;
@@ -114,28 +114,28 @@ interface RunnerItem extends Runnable {
 	Object[] getProps();
 }
 
-//final class WorkProxy {
-//	private static void workCore() {
-//		try {
-//			System.out.println("Start");
-//			Thread.sleep(3000);
-//			System.out.println("End");
-//		}
-//		catch (Exception ex) { }
-//	}
-//
-//	public static synchronized void test1() {
-//		workCore();
-//	}
-//
-//	public static void test2() {
-//		synchronized (WorkProxy.class) {
-//			workCore();
-//		}
-//	}
-//
-//	public static void test3() {
-//		workCore();
-//	}
-//}
+final class WorkProxy {
+	private static void workCore() {
+		try {
+			System.out.println("Start");
+			Thread.sleep(3000);
+			System.out.println("End");
+		}
+		catch (Exception ex) { }
+	}
+
+	public static synchronized void test1() {
+		workCore();
+	}
+
+	public static void test2() {
+		synchronized (WorkProxy.class) {
+			workCore();
+		}
+	}
+
+	public static void test3() {
+		workCore();
+	}
+}
 

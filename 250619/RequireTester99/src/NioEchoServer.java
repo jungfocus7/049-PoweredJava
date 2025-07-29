@@ -11,8 +11,8 @@ import java.util.Set;
 
 public class NioEchoServer {
 
-	private static volatile boolean _xx = false;
-	private static volatile Object _xx2 = null;
+//	private static volatile boolean _xx = false;
+//	private static volatile Object _xx2 = null;
 
     private static final int PORT = 12345;
     private static final int BUFFER_SIZE = 1024;
