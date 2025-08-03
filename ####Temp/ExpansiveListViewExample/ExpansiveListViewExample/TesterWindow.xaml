@@ -1,0 +1,20 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:ExpansiveListViewExample"
+    x:Class="ExpansiveListViewExample.TesterWindow"
+    ResizeMode="CanResizeWithGrip" SizeToContent="WidthAndHeight"
+    WindowStartupLocation="Manual" Left="30" Top="10" Background="WhiteSmoke">
+    <Grid Width="800" Height="600" x:Name="_grdrt">
+        <local:ListViewEx99 Margin="10,10,83,125" x:Name="_lst31"/>
+
+        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Hand"
+            Margin="0,0,266,24" Width="75" Height="30" Content="몇개 삭제" x:Name="_btn34"/>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Hand"
+            Margin="0,0,186,24" Width="75" Height="30" Content="몇개 추가" x:Name="_btn33"/>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Hand"
+            Margin="0,0,106,24" Width="75" Height="30" Content="모두 선택" x:Name="_btn32"/>
+        <Button HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="Hand"
+            Margin="0,0,26,24" Width="75" Height="30" Content="선택 해제" x:Name="_btn31"/>
+    </Grid>
+</Window>

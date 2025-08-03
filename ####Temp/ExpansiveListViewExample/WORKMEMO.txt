@@ -1,0 +1,14 @@
+결국 WPF의 ListView 간단하게 기본형으로 UI리스트를 구현하기에는 좋다.
+하지만 최대 단점은 바인딩한 ListViewItem과 Content(모델객체, BaseInfo)와의
+유기적인 INotifyPropertyChanged, IsSelected 동기화 또는 바인딩을 제대로 연결 할수 없는
+치명적인 다점이 있다 그래서 그냥 선택(IsSelected)된 아이템은 ListView객체의 내장 함수를 사용하는 것이 좋다.
+
+_lst31.SelectAll();
+_lst31.UnselectAll();
+
+이것이 3일동의 연구와 삽질의 결과이다.
+
+ListView는 INotifyPropertyChanged 그냥 믿고쓰면 망한다. 조심하자
+
+진짜 결론 WPF 기본 컨트롤들은 진짜 쓰레기 성능이다. ㅠㅠ
+IsSelected가 진짜 개ㅈ병신같은 성능이다.
