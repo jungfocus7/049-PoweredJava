@@ -26,85 +26,85 @@ zzzzzz
 
 //		threadTestLong31();
 
-		threadTestLong34();
+//		threadTestLong34();
 	}
 
 
 
 
-	private static Thread _trd1;
-	private static Thread _trd2;
-	private static void threadTestLong31() {
-		_trd1 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				WorkProxy.test3();
-			}
-		});
-		_trd1.start();
-
-		_trd2 = new Thread(new Runnable() {
-			@Override
-			public void run() {
-				WorkProxy.test3();
-			}
-		});
-		_trd2.start();
-
-	}
-
-
-	private static volatile boolean _isLoop = true;
-	private static void threadTestLong34() {
-		long ln = System.currentTimeMillis();
-
-		List<Thread> lst = new ArrayList<Thread>();
-
-		Thread trd;
-		for (int i = 0; i < 5000; i++) {
-			trd = new Thread(new RunnerItem() {
-				private long _lx = System.currentTimeMillis();
-
-				@Override
-				public Object[] getProps() {
-					// TODO Auto-generated method stub
-					return null;
-				}
-
-				@Override
-				public void run() {
-					while (_isLoop) {
-						try {
-							Thread.sleep(3000);
-						}
-						catch (Exception ex) { }
-
-						long ly = System.currentTimeMillis() - _lx;
-						println("~~~> " + ly);
-						if (ly > 50000) {
-							_isLoop = false;
-							println("~~~ " + ly);
-						}
-					}
-				}
-			});
-			trd.setDaemon(true);
-			trd.start();
-
-			lst.add(trd);
-		}
-
-		for (Thread tx : lst) {
-			try {
-				tx.join();
-			}
-			catch (Exception ex) { }
-		}
-
-		ln = System.currentTimeMillis() - ln;
-
-		println("End of work... " + ln);
-	}
+//	private static Thread _trd1;
+//	private static Thread _trd2;
+//	private static void threadTestLong31() {
+//		_trd1 = new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				WorkProxy.test3();
+//			}
+//		});
+//		_trd1.start();
+//
+//		_trd2 = new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				WorkProxy.test3();
+//			}
+//		});
+//		_trd2.start();
+//
+//	}
+//
+//
+//	private static volatile boolean _isLoop = true;
+//	private static void threadTestLong34() {
+//		long ln = System.currentTimeMillis();
+//
+//		List<Thread> lst = new ArrayList<Thread>();
+//
+//		Thread trd;
+//		for (int i = 0; i < 5000; i++) {
+//			trd = new Thread(new RunnerItem() {
+//				private long _lx = System.currentTimeMillis();
+//
+//				@Override
+//				public Object[] getProps() {
+//					// TODO Auto-generated method stub
+//					return null;
+//				}
+//
+//				@Override
+//				public void run() {
+//					while (_isLoop) {
+//						try {
+//							Thread.sleep(3000);
+//						}
+//						catch (Exception ex) { }
+//
+//						long ly = System.currentTimeMillis() - _lx;
+//						println("~~~> " + ly);
+//						if (ly > 50000) {
+//							_isLoop = false;
+//							println("~~~ " + ly);
+//						}
+//					}
+//				}
+//			});
+//			trd.setDaemon(true);
+//			trd.start();
+//
+//			lst.add(trd);
+//		}
+//
+//		for (Thread tx : lst) {
+//			try {
+//				tx.join();
+//			}
+//			catch (Exception ex) { }
+//		}
+//
+//		ln = System.currentTimeMillis() - ln;
+//
+//		println("End of work... " + ln);
+//	}
 
 }
 
