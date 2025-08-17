@@ -1,0 +1,11 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:ccs="clr-namespace:NobossIndustryWpf_z.CustomControls"
+    x:Class="NobossIndustryWpf_z.MainWindow"
+    ResizeMode="CanResizeWithGrip" SizeToContent="WidthAndHeight"
+    WindowStartupLocation="Manual" Left="100" Top="40">
+    <Grid Width="800" Height="600" x:Name="m_grdrt">
+        <ccs:DataGridEx31 x:Name="m_dtgrd"/>
+    </Grid>
+</Window>
