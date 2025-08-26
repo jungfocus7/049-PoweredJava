@@ -1,2 +1,6 @@
 /desktop.ini
 /\#\#\#\#JDK
+\#\#Debug/
+\#\#Release/
+.vs/
+obj/
