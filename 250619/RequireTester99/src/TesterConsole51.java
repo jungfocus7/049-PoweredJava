@@ -23,6 +23,23 @@ public final class TesterConsole51 {
 		println("IntegerCaster.from(ByteCaster.max) >> " + IntegerCaster.from(ByteCaster.max));
 		println("IntegerCaster.from(ByteCaster.min) >> " + IntegerCaster.from(ByteCaster.min));
 		println(StringHelper.empty);
+		println(StringHelper.empty);
+
+		println(">> " + IntegerCaster.from(Double.POSITIVE_INFINITY));
+		println(">> " + IntegerCaster.from(Double.NEGATIVE_INFINITY));
+		println(">> " + IntegerCaster.from(Double.NaN));
+		println(">> " + IntegerCaster.from(Double.MAX_VALUE));
+		println(">> " + IntegerCaster.from(Double.MIN_NORMAL));
+		println(">> " + IntegerCaster.from(Double.MIN_VALUE));
+		println(StringHelper.empty);
+
+		println(">> " + IntegerCaster.from(Float.POSITIVE_INFINITY));
+		println(">> " + IntegerCaster.from(Float.NEGATIVE_INFINITY));
+		println(">> " + IntegerCaster.from(Float.NaN));
+		println(">> " + IntegerCaster.from(Float.MAX_VALUE));
+		println(">> " + IntegerCaster.from(Float.MIN_NORMAL));
+		println(">> " + IntegerCaster.from(Float.MIN_VALUE));
+		println(StringHelper.empty);
 	}
 
 	private static void testLong() {
@@ -36,6 +53,23 @@ public final class TesterConsole51 {
 		println("LongCaster.from(ShortCaster.min) >> " + LongCaster.from(ShortCaster.min));
 		println("LongCaster.from(ByteCaster.max) >> " + LongCaster.from(ByteCaster.max));
 		println("LongCaster.from(ByteCaster.min) >> " + LongCaster.from(ByteCaster.min));
+		println(StringHelper.empty);
+		println(StringHelper.empty);
+
+		println(">> " + LongCaster.from(Double.POSITIVE_INFINITY));
+		println(">> " + LongCaster.from(Double.NEGATIVE_INFINITY));
+		println(">> " + LongCaster.from(Double.NaN));
+		println(">> " + LongCaster.from(Double.MAX_VALUE));
+		println(">> " + LongCaster.from(Double.MIN_NORMAL));
+		println(">> " + LongCaster.from(Double.MIN_VALUE));
+		println(StringHelper.empty);
+
+		println(">> " + LongCaster.from(Float.POSITIVE_INFINITY));
+		println(">> " + LongCaster.from(Float.NEGATIVE_INFINITY));
+		println(">> " + LongCaster.from(Float.NaN));
+		println(">> " + LongCaster.from(Float.MAX_VALUE));
+		println(">> " + LongCaster.from(Float.MIN_NORMAL));
+		println(">> " + LongCaster.from(Float.MIN_VALUE));
 		println(StringHelper.empty);
 	}
 
@@ -51,6 +85,23 @@ public final class TesterConsole51 {
 		println("ShortCaster.from(ByteCaster.max) >> " + ShortCaster.from(ByteCaster.max));
 		println("ShortCaster.from(ByteCaster.min) >> " + ShortCaster.from(ByteCaster.min));
 		println(StringHelper.empty);
+		println(StringHelper.empty);
+
+		println(">> " + ShortCaster.from(Double.POSITIVE_INFINITY));
+		println(">> " + ShortCaster.from(Double.NEGATIVE_INFINITY));
+		println(">> " + ShortCaster.from(Double.NaN));
+		println(">> " + ShortCaster.from(Double.MAX_VALUE));
+		println(">> " + ShortCaster.from(Double.MIN_NORMAL));
+		println(">> " + ShortCaster.from(Double.MIN_VALUE));
+		println(StringHelper.empty);
+
+		println(">> " + ShortCaster.from(Float.POSITIVE_INFINITY));
+		println(">> " + ShortCaster.from(Float.NEGATIVE_INFINITY));
+		println(">> " + ShortCaster.from(Float.NaN));
+		println(">> " + ShortCaster.from(Float.MAX_VALUE));
+		println(">> " + ShortCaster.from(Float.MIN_NORMAL));
+		println(">> " + ShortCaster.from(Float.MIN_VALUE));
+		println(StringHelper.empty);
 	}
 
 	private static void testByte() {
@@ -64,6 +115,23 @@ public final class TesterConsole51 {
 		println("ByteCaster.from(LongCaster.min) >> " + ByteCaster.from(LongCaster.min));
 		println("ByteCaster.from(ShortCaster.max) >> " + ByteCaster.from(ShortCaster.max));
 		println("ByteCaster.from(ShortCaster.min) >> " + ByteCaster.from(ShortCaster.min));
+		println(StringHelper.empty);
+		println(StringHelper.empty);
+
+		println(">> " + ByteCaster.from(Double.POSITIVE_INFINITY));
+		println(">> " + ByteCaster.from(Double.NEGATIVE_INFINITY));
+		println(">> " + ByteCaster.from(Double.NaN));
+		println(">> " + ByteCaster.from(Double.MAX_VALUE));
+		println(">> " + ByteCaster.from(Double.MIN_NORMAL));
+		println(">> " + ByteCaster.from(Double.MIN_VALUE));
+		println(StringHelper.empty);
+
+		println(">> " + ByteCaster.from(Float.POSITIVE_INFINITY));
+		println(">> " + ByteCaster.from(Float.NEGATIVE_INFINITY));
+		println(">> " + ByteCaster.from(Float.NaN));
+		println(">> " + ByteCaster.from(Float.MAX_VALUE));
+		println(">> " + ByteCaster.from(Float.MIN_NORMAL));
+		println(">> " + ByteCaster.from(Float.MIN_VALUE));
 		println(StringHelper.empty);
 	}
 
@@ -79,6 +147,15 @@ public final class TesterConsole51 {
 		println("DoubleCaster.from(ByteCaster.max) >> " + DoubleCaster.from(ByteCaster.max));
 		println("DoubleCaster.from(ByteCaster.min) >> " + DoubleCaster.from(ByteCaster.min));
 		println(StringHelper.empty);
+		println(StringHelper.empty);
+
+		println(">> " + DoubleCaster.from(Float.POSITIVE_INFINITY));
+		println(">> " + DoubleCaster.from(Float.NEGATIVE_INFINITY));
+		println(">> " + DoubleCaster.from(Float.NaN));
+		println(">> " + DoubleCaster.from(Float.MAX_VALUE));
+		println(">> " + DoubleCaster.from(Float.MIN_NORMAL));
+		println(">> " + DoubleCaster.from(Float.MIN_VALUE));
+		println(StringHelper.empty);
 	}
 
 	private static void testFloat() {
@@ -93,17 +170,24 @@ public final class TesterConsole51 {
 		println("FloatCaster.from(ByteCaster.max) >> " + FloatCaster.from(ByteCaster.max));
 		println("FloatCaster.from(ByteCaster.min) >> " + FloatCaster.from(ByteCaster.min));
 		println(StringHelper.empty);
+		println(StringHelper.empty);
+
+		println(">> " + ByteCaster.from(Double.POSITIVE_INFINITY));
+		println(">> " + ByteCaster.from(Double.NEGATIVE_INFINITY));
+		println(">> " + ByteCaster.from(Double.NaN));
+		println(">> " + ByteCaster.from(Double.MAX_VALUE));
+		println(">> " + ByteCaster.from(Double.MIN_NORMAL));
+		println(">> " + ByteCaster.from(Double.MIN_VALUE));
+		println(StringHelper.empty);
 	}
 
-	private static void __test_etc() {
-		println(">> " + ByteCaster.from(Float.POSITIVE_INFINITY));
-		println(">> " + ByteCaster.from(Float.NEGATIVE_INFINITY));
-		println(">> " + ByteCaster.from(Float.BYTES));
-		println(">> " + ByteCaster.from(Float.MAX_EXPONENT));
-		println(">> " + ByteCaster.from(Float.NaN));
-		println(">> " + ((byte)Float.NaN));
-		println(" >> " + ((float)Integer.MAX_VALUE));
-	}
+//	private static void __test_etc() {
+//		println(">> " + ByteCaster.from(Float.POSITIVE_INFINITY));
+//		println(">> " + ByteCaster.from(Float.NEGATIVE_INFINITY));
+//		println(">> " + ByteCaster.from(Float.BYTES));
+//		println(">> " + ByteCaster.from(Float.MAX_EXPONENT));
+//		println(">> " + ByteCaster.from(Float.NaN));
+//	}
 
 	public static void main(String[] args) {
 		testInteger();
@@ -115,6 +199,12 @@ public final class TesterConsole51 {
 
 //		__test_etc();
 	}
+
+
+
+
+
+
 
 
 

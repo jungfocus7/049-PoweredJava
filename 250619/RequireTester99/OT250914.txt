@@ -1,0 +1,142 @@
+IntegerCaster.from(DoubleCaster.max) >> 2147483647
+IntegerCaster.from(DoubleCaster.min) >> -2147483648
+IntegerCaster.from(FloatCaster.max) >> 2147483647
+IntegerCaster.from(FloatCaster.min) >> -2147483648
+IntegerCaster.from(LongCaster.max) >> 2147483647
+IntegerCaster.from(LongCaster.min) >> -2147483648
+IntegerCaster.from(ShortCaster.max) >> 32767
+IntegerCaster.from(ShortCaster.min) >> -32768
+IntegerCaster.from(ByteCaster.max) >> 127
+IntegerCaster.from(ByteCaster.min) >> -128
+
+
+>> 2147483647
+>> -2147483648
+>> 0
+>> 2147483647
+>> 0
+>> 0
+
+>> 2147483647
+>> -2147483648
+>> 0
+>> 2147483647
+>> 0
+>> 0
+
+LongCaster.from(DoubleCaster.max) >> 9223372036854775807
+LongCaster.from(DoubleCaster.min) >> -9223372036854775808
+LongCaster.from(FloatCaster.max) >> 9223372036854775807
+LongCaster.from(FloatCaster.min) >> -9223372036854775808
+LongCaster.from(IntegerCaster.max) >> 2147483647
+LongCaster.from(IntegerCaster.min) >> -2147483648
+LongCaster.from(ShortCaster.max) >> 32767
+LongCaster.from(ShortCaster.min) >> -32768
+LongCaster.from(ByteCaster.max) >> 127
+LongCaster.from(ByteCaster.min) >> -128
+
+
+>> 9223372036854775807
+>> -9223372036854775808
+>> 0
+>> 9223372036854775807
+>> 0
+>> 0
+
+>> 9223372036854775807
+>> -9223372036854775808
+>> 0
+>> 9223372036854775807
+>> 0
+>> 0
+
+ShortCaster.from(DoubleCaster.max) >> 32767
+ShortCaster.from(DoubleCaster.min) >> -32768
+ShortCaster.from(FloatCaster.max) >> 32767
+ShortCaster.from(FloatCaster.min) >> -32768
+ShortCaster.from(IntegerCaster.max) >> 32767
+ShortCaster.from(IntegerCaster.min) >> -32768
+ShortCaster.from(LongCaster.max) >> 32767
+ShortCaster.from(LongCaster.min) >> -32768
+ShortCaster.from(ByteCaster.max) >> 127
+ShortCaster.from(ByteCaster.min) >> -128
+
+
+>> 32767
+>> -32768
+>> 0
+>> 32767
+>> 0
+>> 0
+
+>> 32767
+>> -32768
+>> 0
+>> 32767
+>> 0
+>> 0
+
+ByteCaster.from(DoubleCaster.max) >> 127
+ByteCaster.from(DoubleCaster.min) >> -128
+ByteCaster.from(FloatCaster.max) >> 127
+ByteCaster.from(FloatCaster.min) >> -128
+ByteCaster.from(IntegerCaster.max) >> 127
+ByteCaster.from(IntegerCaster.min) >> -128
+ByteCaster.from(LongCaster.max) >> 127
+ByteCaster.from(LongCaster.min) >> -128
+ByteCaster.from(ShortCaster.max) >> 127
+ByteCaster.from(ShortCaster.min) >> -128
+
+
+>> 127
+>> -128
+>> 0
+>> 127
+>> 0
+>> 0
+
+>> 127
+>> -128
+>> 0
+>> 127
+>> 0
+>> 0
+
+DoubleCaster.from(FloatCaster.max) >> 3.4028234663852886E38
+DoubleCaster.from(FloatCaster.min) >> -3.4028234663852886E38
+DoubleCaster.from(IntegerCaster.max) >> 2.147483647E9
+DoubleCaster.from(IntegerCaster.min) >> -2.147483648E9
+DoubleCaster.from(LongCaster.max) >> 9.223372036854776E18
+DoubleCaster.from(LongCaster.min) >> -9.223372036854776E18
+DoubleCaster.from(ShortCaster.max) >> 32767.0
+DoubleCaster.from(ShortCaster.min) >> -32768.0
+DoubleCaster.from(ByteCaster.max) >> 127.0
+DoubleCaster.from(ByteCaster.min) >> -128.0
+
+
+>> Infinity
+>> -Infinity
+>> NaN
+>> 3.4028234663852886E38
+>> 1.1754943508222875E-38
+>> 1.401298464324817E-45
+
+FloatCaster.from(DoubleCaster.max) >> 3.4028235E38
+FloatCaster.from(DoubleCaster.min) >> -3.4028235E38
+FloatCaster.from(IntegerCaster.max) >> 2.1474836E9
+FloatCaster.from(IntegerCaster.min) >> -2.1474836E9
+FloatCaster.from(LongCaster.max) >> 9.223372E18
+FloatCaster.from(LongCaster.min) >> -9.223372E18
+FloatCaster.from(ShortCaster.max) >> 32767.0
+FloatCaster.from(ShortCaster.min) >> -32768.0
+FloatCaster.from(ByteCaster.max) >> 127.0
+FloatCaster.from(ByteCaster.min) >> -128.0
+
+
+>> 127
+>> -128
+>> 0
+>> 127
+>> 0
+>> 0
+
