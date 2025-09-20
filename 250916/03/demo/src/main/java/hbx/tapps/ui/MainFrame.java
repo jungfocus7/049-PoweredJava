@@ -3,7 +3,7 @@ package hbx.tapps.ui;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Container;
+// import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,9 +12,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+// import java.util.ArrayList;
+// import java.util.HashMap;
+// import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -43,28 +43,7 @@ public final class MainFrame extends JFrame {
 
         // initControls();
         initControls2();
-
-
-
-        // String trtp = "MainRun";
-        // switch (trtp) {
-        //     case "SysRun": {
-        //         break;
-        //     }
-        //     case "MainRun": {
-        //         break;
-        //     }
-        //     case "SubRun": {
-        //         break;
-        //     }
-        // }
-
-        // _userInfoMap.put(_users, new ArrayList<UserInfo>());
     }
-
-    // private static final String _keeper = "Keeper";
-    // private static final String _users = "User";
-    // private static final HashMap<String, List<UserInfo>> _userInfoMap = new HashMap<String, List<UserInfo>>();
 
     // private CanvasPanel _cvs;
 
@@ -140,37 +119,6 @@ public final class MainFrame extends JFrame {
         // _cvs = new CanvasPanel();
         // _cvs.toString();
         // add(_cvs);
-    }
-}
-
-final class CanvasPanel extends JPanel implements MouseMotionListener {
-    public CanvasPanel() {
-        addMouseMotionListener(this);
-    }
-
-    @Override
-    public void paint(Graphics tg) {
-        Graphics2D tg2d = (Graphics2D) tg;
-        tg2d.setPaint(Color.BLUE);
-        // tg2d.setColor(Color.RED);
-        tg2d.setStroke(new BasicStroke(5));
-        // tg2d.setBackground(Color.RED);
-        // tg2d.drawLine(0, 0, 500, 500);
-        // tg2d.drawRect(10, 10, 100, 100);
-        tg2d.drawRect(10, 10, 100, 100);
-        tg2d.setPaint(Color.RED);
-        tg2d.fillRect(10, 10, 100, 100);
-        MainApp.println("paint");
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent me) {
-        MainApp.println(">>> " + me.toString());
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
-
     }
 
 }

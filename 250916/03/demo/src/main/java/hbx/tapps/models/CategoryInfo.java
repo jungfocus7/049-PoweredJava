@@ -1,6 +1,6 @@
 package hbx.tapps.models;
 
-import hbx.tapps.hbx.tapps.core.IModelInfo;
+import hbx.tapps.core.IModelInfo;
 
 public final class CategoryInfo implements IModelInfo {
     public CategoryInfo(String rawid, String type, String name) {

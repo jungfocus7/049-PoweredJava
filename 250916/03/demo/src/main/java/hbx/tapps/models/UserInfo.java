@@ -1,6 +1,6 @@
 package hbx.tapps.models;
 
-import hbx.tapps.hbx.tapps.core.IModelInfo;
+import hbx.tapps.core.IModelInfo;
 
 public final class UserInfo implements IModelInfo {
     public UserInfo(String rawid, String email, String name) {
