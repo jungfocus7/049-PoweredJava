@@ -11,6 +11,12 @@ import hbx.tapps.MainApp;
 
 public final class CanvasPanel extends JPanel implements MouseMotionListener {
     public CanvasPanel() {
+    }
+
+    private MainFrame _mfrm;
+
+    public void initOnce(MainFrame mfrm) {
+        _mfrm = mfrm;
         addMouseMotionListener(this);
     }
 
@@ -31,7 +37,8 @@ public final class CanvasPanel extends JPanel implements MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent me) {
-        MainApp.println(">>> " + me.toString());
+        _mfrm.setTitle(">>> " + me.toString());
+        // MainApp.println(">>> " + me.toString());
     }
 
     @Override
