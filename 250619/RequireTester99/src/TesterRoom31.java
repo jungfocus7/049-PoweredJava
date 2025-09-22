@@ -1,3 +1,27 @@
+
+
+public final class TesterRoom31 {
+ 	private static void println(String txt) {
+		System.out.println(txt);
+	}
+
+ 	public static void main(String[] args) {
+ 		float vf = Float.MAX_VALUE;
+ 		int vn = (int)vf;
+
+ 		int n1 = (int)Float.MAX_VALUE;
+ 		int n2 = (int)Float.MIN_VALUE;
+
+ 		float f1 = Integer.MAX_VALUE;
+// 		decimal
+
+ 		println(">>>>>");
+ 	}
+}
+
+
+
+
 // import java.util.ArrayList;
 // import java.util.List;
 
