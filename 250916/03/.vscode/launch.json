@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TesterTetrisGame",
+            "request": "launch",
+            "mainClass": "hbx.atests.TesterTetrisGame",
+            "projectName": "hbjavademo"
+        },
+        {
+            "type": "java",
+            "name": "TesterMain81",
+            "request": "launch",
+            "mainClass": "hbx.atests.TesterMain81",
+            "projectName": "hbjavademo"
+        },
+        {
+            "type": "java",
             "name": "TesterMain72",
             "request": "launch",
             "mainClass": "hbx.standalone.TesterMain72",
