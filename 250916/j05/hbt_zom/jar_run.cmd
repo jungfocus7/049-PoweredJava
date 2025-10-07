@@ -1,0 +1,1 @@
+java -jar hbt_zom.jar

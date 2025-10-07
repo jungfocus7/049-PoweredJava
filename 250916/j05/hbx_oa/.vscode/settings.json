@@ -1,0 +1,10 @@
+{
+    "java.project.sourcePaths": [
+        "src"
+    ],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [],
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.debug.settings.console": "internalConsole",
+    "java.configuration.updateBuildConfiguration": "interactive",
+}

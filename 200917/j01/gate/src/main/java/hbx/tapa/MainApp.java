@@ -1,6 +1,7 @@
 package hbx.tapa;
 
 import java.awt.BorderLayout;
+import java.awt.geom.Ellipse2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,8 @@ public final class MainApp {
         } finally {
             println("무조건 실행");
         }
+
+        Ellipse2D.Double circle = new Ellipse2D.Double(50, 50, 100, 100);
 
         // initComponents();
     }
