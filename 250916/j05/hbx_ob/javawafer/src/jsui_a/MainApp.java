@@ -6,6 +6,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 // import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -21,7 +24,7 @@ public final class MainApp {
     }
 
 	public static void clearCall() {
-		// println("##clearCall");
+		println("##clearCall");
 		System.gc();
 	}
 
@@ -41,6 +44,14 @@ public final class MainApp {
         if (_mfrm == null) {
             _mfrm = new MainFrame();
             _mfrm.open();
+
+            _mfrm.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent te) {
+                    // MainApp.println(">>> " + te);
+                    _mfrm.getRightPanel().updateRenderType(te.getKeyCode());
+                }
+            });
         }
     }
 }
@@ -69,6 +80,9 @@ final class MainFrame extends JFrame {
 	private JPanel _pnlRootCont;
 	private JPanel _pnlLeft;
 	private RightPanel _pnlRight;
+    public RightPanel getRightPanel() {
+        return _pnlRight;
+    }
 
 	private void initComponents() {
 		_pnlRootCont = (JPanel)getContentPane();
@@ -81,6 +95,7 @@ final class MainFrame extends JFrame {
 		_pnlRootCont.add(_pnlLeft, BorderLayout.WEST);
 
 		_pnlRight = new RightPanel();
+        _pnlRight.setBackground(Color.darkGray);
 		_pnlRootCont.add(_pnlRight, BorderLayout.CENTER);
 	}
 
@@ -107,7 +122,7 @@ final class RightPanel extends JPanel {
             @Override
             public void render(Graphics2D g2) {
                 g2.setColor(Color.green);
-                for (int i = 0; i < 50000000; i++) {
+                for (int i = 0; i < 5000000; i++) {
                     int tx = (int)(0.00002 * i);
                     int ty = (int)(0.00002 * i);
                     g2.fillRect(tx, ty, 10, 10);
@@ -120,7 +135,21 @@ final class RightPanel extends JPanel {
 
     private static final String _RTP_NORMAL = "rtpNormal";
     private static final String _RTP_BITMAP = "rtpBitmap";
-    private final String _rtp = _RTP_NORMAL;
+    private String _rtp = _RTP_NORMAL;
+    public void updateRenderType(int keyCode) {
+        if (keyCode == KeyEvent.VK_0) {
+            _rtp = null;
+            repaint();
+        } else if (keyCode == KeyEvent.VK_1) {
+            _rtp = _RTP_NORMAL;
+            repaint();
+        } else if (keyCode == KeyEvent.VK_2) {
+            _rtp = _RTP_BITMAP;
+            repaint();
+        } else if (keyCode == KeyEvent.VK_G) {
+            MainApp.clearCall();
+        }
+    }
 
     private BufferedImage _bfimg;
     private void bitmapRender(Graphics tg) {
@@ -165,7 +194,7 @@ final class RightPanel extends JPanel {
         if (_RTP_NORMAL.equals(_rtp)) {
             normalRender(tg);
         } else if (_RTP_BITMAP.equals(_rtp)) {
-            // bitmapRender(tg);
+            bitmapRender(tg);
         }
 
         MainApp.clearCall();
