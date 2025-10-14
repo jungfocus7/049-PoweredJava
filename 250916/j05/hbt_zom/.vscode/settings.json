@@ -7,4 +7,7 @@
     "java.debug.settings.onBuildFailureProceed": true,
     "java.debug.settings.console": "internalConsole",
     "java.configuration.updateBuildConfiguration": "interactive",
+    "java.dependency.packagePresentation": "hierarchical",
+    "java.project.explorer.showNonJavaResources": false,
+    "java.dependency.syncWithFolderExplorer": false,
 }

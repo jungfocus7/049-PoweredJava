@@ -1,6 +1,7 @@
 package hbt.winapps;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.geom.*;
 import javax.swing.*;
 import javax.swing.UIManager.*;
@@ -30,11 +31,13 @@ public final class MainApp {
             setTitle("XXXX");
 
             _rootCont = (JPanel)getContentPane();
-            _rootCont.setPreferredSize(new Dimension(500, 700));
+            // _rootCont.setPreferredSize(new Dimension(500, 700));
+            _rootCont.setPreferredSize(new Dimension(470, 640));
             initComponents();
 
             pack();
-            setLocation(100, 40);
+            // setLocation(100, 10);
+            setLocation(0, 0);
             // setResizable(false);
             setMinimumSize(getSize());
             setVisible(true);
@@ -78,23 +81,117 @@ public final class MainApp {
             MainApp.println(">>> _grdw: " + _grdw);
             MainApp.println(">>> _grdh: " + _grdh);
 
+            setLayout(null);
             setSize(_grdw, _grdh);
+
+
+            addMouseMotionListener(new MouseMotionListener() {
+                @Override
+                public void mouseDragged(MouseEvent te) {
+                }
+
+                private int get_dx(Point2D mpt) {
+                    int ri = (int)Math.floor(mpt.getX() / (_cellw + 1));
+                    // if (ri >= _colcnt)
+                    //     ri = -1;
+                    if (ri < 0) ri = 0;
+                    else if (ri >= _colcnt)
+                        ri = _colcnt - 1;
+                    return ri;
+                }
+
+                private int get_dy(Point2D mpt) {
+                    int ri = (int)Math.floor(mpt.getY() / (_cellh + 1));
+                    // if (ri >= _rowcnt)
+                    //     ri = -1;
+                    if (ri < 0) ri = 0;
+                    else if (ri >= _rowcnt)
+                        ri = _rowcnt - 1;
+                    return ri;
+                }
+
+                @Override
+                public void mouseMoved(MouseEvent te) {
+                    // MainApp.println("Unimplemented method 'mousePressed'");
+
+                    Point2D mpt = (Point2D)getMousePosition();
+
+                    int dx = get_dx(mpt);
+                    int dy = get_dy(mpt);
+                    String msg = ">>> dx: " + dx + ", dy: " + dy;
+                    MainApp.println(msg);
+                }
+            });
+
+            addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent te) {
+                    // MainApp.println("Unimplemented method 'mouseClicked'");
+                }
+
+                @Override
+                public void mousePressed(MouseEvent te) {
+                    // MainApp.println("Unimplemented method 'mousePressed'");
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent te) {
+                    // MainApp.println("Unimplemented method 'mouseReleased'");
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent te) {
+                    // MainApp.println("Unimplemented method 'mouseEntered'");
+                }
+
+                @Override
+                public void mouseExited(MouseEvent te) {
+                    // MainApp.println("Unimplemented method 'mouseExited'");
+                }
+            });
+
+            add(new _CellRect(this, 2, 2));
         }
         private _GamePanel _pgpnl;
-        @SuppressWarnings("unused")
         public _GamePanel getGamePanel() {
             return _pgpnl;
         }
 
         private final double _cellw = 30;
+        public int get_crw(boolean ba) {
+            if (ba)
+                return (int)_cellw + 1;
+            else
+                return (int)_cellw;
+        }
         private final double _cellh = 30;
+        public int get_crh(boolean ba) {
+            if (ba)
+                return (int)_cellh + 1;
+            else
+                return (int)_cellh;
+        }
+
         private final int _colcnt = 10;
+        public int get_colcnt() {
+            return _colcnt;
+        }
         private final int _rowcnt = 20;
+        public int get_rowcnt() {
+            return _rowcnt;
+        }
+
         private final Rectangle2D.Double _drc = new Rectangle2D.Double();
         private final Line2D.Double _dln = new Line2D.Double();
 
-        private final int _grdw = (((int)(_cellw + 1)) * _colcnt) + 1;
-        private final int _grdh = (((int)(_cellh + 1)) * _rowcnt) + 1;
+        private final int _grdw = (get_crw(true) * _colcnt) + 1;
+        public int get_grdw() {
+            return _grdw;
+        }
+        private final int _grdh = (get_crh(true) * _rowcnt) + 1;
+        public int get_grdh() {
+            return _grdh;
+        }
 
         private final Color _clggrd = Color.black;
         private final Color _clgln = new Color(0x242323);
@@ -106,10 +203,16 @@ public final class MainApp {
             if (checkNotRenderable()) return;
 
             Graphics2D g2d = (Graphics2D)tg;
+            g2d.setRenderingHint(
+                RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON
+            );
+
             g2d.setColor(_clggrd);
             _drc.setRect(0, 0, _grdw, _grdh);
             g2d.fill(_drc);
-            MainApp.println("~~~~~~~~~~~~~~~");
+
+            MainApp.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             // MainApp.println(">> " + MainApp.getMainFrame().isActive());
             // MainApp.println(">> " + _pgpnl.getWidth());
             // MainApp.println(">> " + _pgpnl.getHeight());
@@ -143,6 +246,81 @@ public final class MainApp {
             //     return false;
             // }
         }
+    }
+
+    private static class _CellRect extends JComponent implements ActionListener {
+        public _CellRect(_CellCanvas pcvs, int dx, int dy) {
+            // int tx = (int)((pcvs.get_crw() * (dx + 1)) / 2.0);
+            // int tx = (pcvs.get_crw() * (dx + 1)) / 2;
+            // int ty = (pcvs.get_crh() * (dy + 1)) / 2;
+            // MainApp.println(">>>");
+
+            // 여기서 내가 뭘하는 건가.... (어렵다)
+            // int crw = pcvs.get_crw(false);
+            // int crh = pcvs.get_crh(false);
+            // int rx = (crw * (dx + 1)) / 2;
+            // int ry = (crh * (dy + 1)) / 2;
+            // int rx = crw * dx;
+            // int ry = crh * dy;
+            // int rw = crw;
+            // int rh = crh;
+            // int rw = crw * 3;
+            // int rh = crh * 3;
+            // int rx = (int)Math.round(dx - ((double)rw / 2));
+            // int ry = (int)Math.round(dy - ((double)rh / 2));
+
+            int rx = pcvs.get_crw(true) * dx;
+            int ry = pcvs.get_crh(true) * dy;
+            int rw = pcvs.get_crw(false);
+            int rh = pcvs.get_crh(false);
+            _frc = new Rectangle(rx, ry, rw, rh);
+            /*
+            _timer = new Timer(100, this);
+            _scx = 1.0;
+            _scy = 1.0;
+            _jct = new Rectangle2D.Double();
+*/
+            setOpaque(true);
+            setSize(_frc.width, _frc.height);
+
+            // _timer.start();
+        }
+        private Rectangle _frc;
+        private Timer _timer;
+        private double _scx;
+        private double _scy;
+        private Rectangle2D.Double _jct;
+
+        @Override
+        public void actionPerformed(ActionEvent te) {
+            repaint(getBounds());
+        }
+
+        @Override
+        protected void paintComponent(Graphics tg) {
+            super.paintComponent(tg);
+
+            MainApp.println("반복실행...");
+
+            Graphics2D g2d = (Graphics2D)tg;
+            g2d.setColor(Color.blue);
+            g2d.fill(_frc);
+            // g2d.fillRect(0, 0, _frc.width, _frc.height);
+
+            // _scx += 0.5;
+            // _scy += 0.5;
+            // g2d.translate(50.0, 50.0);
+            // g2d.translate(5.0, 5.0);
+            // g2d.scale(_scx, _scy);
+            // g2d.translate(-50.0, -50.0);
+            // g2d.translate(-5.0, -5.0);
+            // g2d.setColor(Color.red);
+            // _rct.setRect(0, 0, _pcvs.get_crw(), _pcvs.get_crh());
+            // g2d.fill(_rct);
+
+            _timer.stop();
+        }
+
     }
 //#endregion
 
