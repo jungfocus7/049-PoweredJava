@@ -141,6 +141,7 @@ final class RightPanel extends JPanel {
         MainApp.clearCall();
     }
 
+    // ~~~~~~
     private void normalRender(Graphics tg) {
         Graphics2D g2 = (Graphics2D)tg;
         g2.setRenderingHint(
