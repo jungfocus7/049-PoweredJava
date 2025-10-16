@@ -16,13 +16,6 @@
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "MainApp",
-            "request": "launch",
-            "mainClass": "jsui_a.MainApp",
-            "projectName": "javawafer_6779eab5"
         }
     ]
 }

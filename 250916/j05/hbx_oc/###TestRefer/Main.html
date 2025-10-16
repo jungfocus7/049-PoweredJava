@@ -1,0 +1,289 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>PhoneGap Tetris</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="format-detection" content="telephone=no" />
+<!--meta name="viewport" content="user-scalable=no, initial-scale=1,
+	maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" /-->
+<meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="description" content="Match-3 puzzle-game written in HTML/CSS/JS">
+
+<style type="text/css">
+body {
+	margin: 0px; padding: 0px;
+	overflow: hidden;
+	background-color: #000000;
+	font-family: Dotum, Gulim, Verdana;
+	font-size: 11px;
+	color: #ffffff;
+}
+
+#rootCont_dv {
+	position: absolute; left: 0px; top: 0px;
+	overflow: hidden;
+	background-color: #006633;
+}
+#leftUiCont_dv {
+	position: absolute; left: 0px; top: 0px;
+	overflow: hidden;
+	background-color: #ffffff;
+}
+#canvasMask_dv {
+	position: absolute; left: 0px; top: 0px;
+	overflow: hidden;
+	background-color: #000000;
+}
+#canvas_dv {
+	position: absolute; left: 0px; top: 0px;
+	overflow: hidden;
+	background-color: #ffffff;
+}
+#bottomUiCont_dv {
+	position: absolute; left: 0px; top: 0px;
+	overflow: hidden;
+	background-color: #ffffff;
+}
+#keyCont_dv {
+	position: absolute; left: 0px; top: 0px;
+	overflow: hidden;
+	background-color: #ffffff;
+}
+#testLog_dv {
+	width: 400px; height: 260px;
+	position: absolute; left: 10px; top: 610px;
+	overflow: scroll;
+	background-color: #ff0000;
+	color: #ffffff;
+	display: none;
+}
+
+html.touch body {
+     overflow: hidden;
+}
+</style>
+<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="hbjs/HB_Utils.js"></script>
+<script type="text/javascript" src="hbjs/HB_Timer.js"></script>
+<script type="text/javascript" src="wjs/GameLogic.js"></script>
+<script type="text/javascript">
+// ::
+var p_layoutSetting = function() {
+	var t_ROOT_W = 720 / 2;
+	var t_ROOT_H = 1280 / 2;
+	//var t_ROOT_MH = 10;
+	//var t_ROOT_MV = 10;
+
+	var t_o = null;
+
+	t_o = jQuery('#rootCont_dv');
+	t_o.css('width', t_ROOT_W + 'px');
+	t_o.css('height', t_ROOT_H + 'px');
+	t_o.css('left', '0px');
+	t_o.css('top', '0px');
+
+	t_o = jQuery('#leftUiCont_dv');
+	t_o.css('width', '130px');
+	t_o.css('height', '400px');
+	t_o.css('left', '10px');
+	t_o.css('top', '10px');
+
+	t_o = jQuery('#canvasMask_dv');
+	t_o.css('width', '200px');
+	t_o.css('height', '400px');
+	t_o.css('left', '150px');
+	t_o.css('top', '10px');
+
+	t_o = jQuery('#canvas_dv');
+	t_o.css('width', '200px');
+	t_o.css('height', '480px');
+	t_o.css('left', '0px');
+	t_o.css('top', '-80px');
+
+	t_o = jQuery('#bottomUiCont_dv');
+	t_o.css('width', (t_ROOT_W - (10 * 2)) + 'px');
+	t_o.css('height', '180px');
+	t_o.css('left', '10px');
+	t_o.css('top', '420px');
+
+	t_o = jQuery('#keyCont_dv');
+	t_o.css('width', '180px');
+	t_o.css('height', '180px');
+	t_o.css('left', '80px');
+	t_o.css('top', '0px');
+	//t_o.css('background-color', '#ff0000');
+
+	var t_cont = jQuery('#keyCont_dv');
+	var t_key = jQuery('<div id="bt_1"><div/>');
+	t_key.css({
+		 'position': 'absolute',
+		 'background-color': '#000000',
+		 'width': '60px',
+		 'height': '60px',
+		 'left': '60px',
+		 'top': '0px'
+	});
+	t_cont.append(t_key);
+	t_key = jQuery('<div id="bt_2"><div/>');
+	t_key.css({
+		 'position': 'absolute',
+		 'background-color': '#000000',
+		 'width': '60px',
+		 'height': '60px',
+		 'left': '0px',
+		 'top': '60px'
+	});
+	t_cont.append(t_key);
+	t_key = jQuery('<div id="bt_3"><div/>');
+	t_key.css({
+		 'position': 'absolute',
+		 'background-color': '#000000',
+		 'width': '60px',
+		 'height': '60px',
+		 'left': '60px',
+		 'top': '60px'
+	});
+	t_cont.append(t_key);
+	t_key = jQuery('<div id="bt_4"><div/>');
+	t_key.css({
+		 'position': 'absolute',
+		 'background-color': '#000000',
+		 'width': '60px',
+		 'height': '60px',
+		 'left': '120px',
+		 'top': '60px'
+	});
+	t_cont.append(t_key);
+	t_key = jQuery('<div id="bt_5"><div/>');
+	t_key.css({
+		 'position': 'absolute',
+		 'background-color': '#000000',
+		 'width': '60px',
+		 'height': '60px',
+		 'left': '60px',
+		 'top': '120px'
+	});
+	t_cont.append(t_key);
+
+	document.addEventListener('touchstart', this.touchstart);
+	document.addEventListener('touchmove', this.touchmove);
+
+	function touchstart(e) {
+		e.preventDefault()
+	}
+
+	function touchmove(e) {
+		e.preventDefault()
+	}
+};
+
+//
+jQuery(document).ready(
+	function() {
+		// GalaxyS3 720x1280
+		p_layoutSetting();
+
+		window.g_gl = new GameLogic(jQuery('#canvas_dv'));
+
+		if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+
+			jQuery('#bt_1').bind('touchstart',function() {
+				g_gl.keyGo(38);
+			});
+			jQuery('#bt_2').bind('touchstart',function() {
+				g_gl.keyGo(37);
+			});
+			jQuery('#bt_3').bind('touchstart',function() {
+				g_gl.keyGo(40);
+			});
+			jQuery('#bt_4').bind('touchstart',function() {
+				g_gl.keyGo(39);
+			});
+			jQuery('#bt_5').bind('touchstart',function() {
+				g_gl.keyGo(88);
+			});
+
+			jQuery('#bt_6').bind('touchstart',function() {
+				g_gl.start();
+			});
+			jQuery('#bt_7').bind('touchstart',function() {
+				g_gl.stop();
+			});
+		}
+		else {
+
+			jQuery('#bt_1').bind('click',function() {
+				g_gl.keyGo(38);
+			});
+			jQuery('#bt_2').bind('click',function() {
+				g_gl.keyGo(37);
+			});
+			jQuery('#bt_3').bind('click',function() {
+				g_gl.keyGo(40);
+			});
+			jQuery('#bt_4').bind('click',function() {
+				g_gl.keyGo(39);
+			});
+			jQuery('#bt_5').bind('click',function() {
+				g_gl.keyGo(88);
+			});
+
+			jQuery('#bt_6').bind('click',function() {
+				g_gl.start();
+			});
+			jQuery('#bt_7').bind('click',function() {
+				g_gl.stop();
+			});
+		}
+
+		window.g_vl = new CellCanvas(jQuery('#prv_dv'));
+		//window.g_vl.shapeCreate2();
+	}
+);
+</script>
+</head>
+
+<!--body ondragstart="return false" onselectstart="return false" oncontextmenu="return false"-->
+<body ontouchmove="event.preventDefault();">
+<div id="rootCont_dv">
+	<div id="leftUiCont_dv" style="color: #000000;">
+		<div style="position: absolute; width: 100px; height: 200px;
+				left: 10px; top: 10px; background-color: #ffffff;
+				font-size: 14px; font-weight: bold;">
+			<span>Next: </span><br />
+			<div style="position: absolute; width: 80px; height: 80px;
+					left: 0px; top: 20px; background-color: #ff0000;" id="prv_dv"></div>
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<br />
+			<span id="txt_1"></span>
+			<br />
+			<span id="txt_2"></span>
+			<br />
+			<span id="txt_3"></span>
+			<br />
+			<br />
+			<br />
+			<br />
+			<button type="button" id="bt_6">Start</button><button type="button" id="bt_7">Stop</button>
+		</div>
+	</div>
+	<div id="canvasMask_dv">
+		<div id="canvas_dv"></div>
+	</div>
+	<div id="bottomUiCont_dv">
+		<div id="keyCont_dv"></div>
+	</div>
+</div>
+
+<div id="testLog_dv"></div>
+</body>
+
+</html>
+
