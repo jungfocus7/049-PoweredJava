@@ -8,6 +8,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -22,7 +23,7 @@ public final class MainApp {
     }
 
 	public static void clearCall() {
-		// println("###MainApp##clearCall");
+		// println("##clearCall");
 		System.gc();
 	}
 
@@ -32,7 +33,7 @@ public final class MainApp {
 
 
     public static void main(String[] args) throws Exception {
-        // println("###MainApp##main");
+        println("##MainApp#main");
 
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -75,7 +76,6 @@ final class MainFrame extends JFrame {
      * MainFrame 생성자
      */
 	public MainFrame() {
-        // MainApp.println("###MainFrame");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Java Tetris");
 
@@ -144,7 +144,6 @@ final class RightPanel extends JPanel {
      * RightPanel 생성자
      */
     public RightPanel() {
-        // MainApp.println("###RightPanel");
         setBackground(_clprb);
         setLayout(null);
 
@@ -209,7 +208,7 @@ final class GameComponent extends JComponent {
      * GameComponent 생성자
      */
     public GameComponent(RightPanel pnlpr) {
-        // MainApp.println("###GameComponent");
+        // MainApp.println("##GameComponent");
         _pnlpr = pnlpr;
 
         SwingUtilities.invokeLater(new Runnable() {
@@ -221,8 +220,8 @@ final class GameComponent extends JComponent {
     }
 
     private void invokeLater_core() {
-        // MainApp.println("###GameComponent##invokeLater_core");
         _frct = new Rectangle(10, 10, get_grdw(1), get_grdh(1));
+        // MainApp.println("##GameComponent#invokeLater_core");
 
         setBounds(_frct);
     }
@@ -244,7 +243,7 @@ final class GameComponent extends JComponent {
             return;
         }
 
-        // MainApp.println("###GameComponent##paintComponent");
+        // MainApp.println("##GameComponent#paintComponent");
         super.paintComponent(tg);
 
         drawBackGrid(tg);
@@ -301,11 +300,10 @@ final class GameComponent extends JComponent {
 
 }
 
-
 final class ShapeObject {
     public static ShapeObject[] createAll() {
 	    return new ShapeObject[] {
-            new ShapeObject(1, new String[][] {
+            create(1, new String[][] {
                 {
                     "xxxx",
                     "oooo",
@@ -320,7 +318,7 @@ final class ShapeObject {
                 },
             }),
 
-            new ShapeObject(2, new String[][] {
+            create(2, new String[][] {
                 {
                     "xxx",
                     "ooo",
@@ -343,7 +341,7 @@ final class ShapeObject {
                 },
             }),
 
-            new ShapeObject(3, new String[][] {
+            create(3, new String[][] {
                 {
                     "xxx",
                     "ooo",
@@ -366,7 +364,7 @@ final class ShapeObject {
                 },
             }),
 
-            new ShapeObject(4, new String[][] {
+            create(4, new String[][] {
                 {
                     "xxx",
                     "ooo",
@@ -389,7 +387,7 @@ final class ShapeObject {
                 },
             }),
 
-            new ShapeObject(5, new String[][] {
+            create(5, new String[][] {
                 {
                     "xxx",
                     "xoo",
@@ -402,7 +400,7 @@ final class ShapeObject {
                 },
             }),
 
-            new ShapeObject(6, new String[][] {
+            create(6, new String[][] {
                 {
                     "xxx",
                     "oox",
@@ -415,7 +413,7 @@ final class ShapeObject {
                 },
             }),
 
-            new ShapeObject(7, new String[][] {
+            create(7, new String[][] {
                 {
                     "oo",
                     "oo",
@@ -425,185 +423,99 @@ final class ShapeObject {
         };
     }
 
-    public ShapeObject(int tpn, String[][] tdma) {
-        // MainApp.println("###ShapeObject");
-        _tpn = tpn;
-        _tdma = tdma;
+    private static ShapeObject create(int tpn, String[][] tdma) {
+        ShapeObject spo = new ShapeObject();
+        spo._tpn = tpn;
+        spo.parseData(tdma);
 
-        int l = _tdma.length;
-        _spma = new ShapeMap[l];
-        for (int i = 0; i < l; i++) {
-            String[] tdm = _tdma[i];
-            ShapeMap spm = new ShapeMap(tdm, i);
-            _spma[i] = spm;
-        }
-
-        MainApp.println(toString());
+        return spo;
     }
+
+    private ShapeObject() {}
 
     private int _tpn;
     public int get_tpn() {
         return _tpn;
     }
 
-    private String[][] _tdma;
-    public String[][] get_tdma() {
-        return _tdma;
+    private final ArrayList<CellInfo> _cis = new ArrayList<CellInfo>();
+
+    private void parseData(String[][] tdma) {
+        for (String[] tdm : tdma) {
+            parseWork_tdm(tdm);
+
+            break;
+            // for (String dls : tdm) {
+            //     for (char mc : dls.toCharArray()) {
+            //         MainApp.println("~~~~~~~~~ " + mc);
+            //     }
+            // }
+
+            // int l = tdm.length;
+            // MainApp.println("~~~~~~~~~ " + l);
+
+            // _cis = new CellInfo[l];
+            // for (int i = 0; i < l; i++) {
+            //     String td = tdm[i];
+            //     _cis[i] = new CellInfo(td);
+            // }
+        }
     }
 
-    private ShapeMap[] _spma;
-    public ShapeMap[] get_spma() {
-        return _spma;
-    }
+    private void parseWork_tdm(String[] tdm) {
+        MainApp.println("~~~~~~~~~ " + tdm);
+        /*int l, m, i, j;
+        String ds;
+        char[] mca;
+        char mc;*/
 
-    private int _pix;
-    public int get_pix() {
-        return _pix;
-    }
-    public void set_pix(int i) {
-        _pix = i;
-    }
+        int m = tdm.length;
+        for (int j = 0; j < m; j++) {
+            String ds = tdm[j];
+            // MainApp.println("~~~~~~~~~ " + ds);
+            char[] mca = ds.toCharArray();
+            int l = mca.length;
+            for (int i = 0; i < l; i++) {
+                char mc = mca[i];
+                if (mc == 'o') {
+                    // MainApp.println(":: " + mc + ", " + i + ", " + j + ", " + get_tpn());
+                    // MainApp.println(":: " + mc + ", " + i + ", " + j);
+                    CellInfo ci = new CellInfo(i, j);
+                    _cis.add(ci);
+                }
+                //
+            }
 
-    private int _piy;
-    public int get_piy() {
-        return _piy;
-    }
-    public void set_piy(int i) {
-        _piy = i;
-    }
+            break;
+        }
 
-    private int _ri;
-    public int get_ri() {
-        return _ri;
-    }
 
+        /*
+        for (String dls : tdm) {
+            char[] mca = dls.toCharArray();
+            int l = mca.length;
+            for (int i = 0; i < l; i++) {
+                char mc = mca[i];
+                MainApp.println("~~~~~~~~~ " + mc + " ~~ " + i);
+            }
+        }*/
+    }
 
     @Override
     public String toString() {
-        StringBuilder tsb = new StringBuilder();
-        tsb.append(String.format("TypeNum: %d\n", _tpn));
-        tsb.append("ShapeMaps: \n");
-        for (ShapeMap spm : _spma) {
-            tsb.append(String.format("%s", spm.toString("   ")));
-        }
-
-        return tsb.toString();
+        return super.toString();
     }
 
 }
-
 
 final class ShapeMap {
-    public ShapeMap(String[] tdm, int mi) {
-        // println("###ShapeMap");
-        _tdm = tdm;
-        _mi = mi;
-
-        parseData();
+    public ShapeMap() {
     }
-
-    private String[] _tdm;
-    public String[] get_tdm() {
-        return _tdm;
-    }
-
-    private int _mi;
-    public int get_mi() {
-        return _mi;
-    }
-
-    private CellInfo[] _cia;
-    public CellInfo[] get_cia() {
-        return _cia;
-    }
-
-    private int getCellCount() {
-        int ri = 0;
-        for (String ls : _tdm) {
-            for (char tc : ls.toCharArray()) {
-                if (tc == 'o') {
-                    ri++;
-                }
-            }
-        }
-
-        return ri;
-    }
-
-    private void parseData() {
-        // MainApp.println("###ShapeMap##parseData");
-
-        int len = getCellCount();
-        int i = 0;
-        _cia = new CellInfo[len];
-
-        int xi = 0;
-        for (String ls : _tdm) {
-            int yi = 0;
-            for (char tc : ls.toCharArray()) {
-                if (tc == 'o') {
-                    CellInfo ci = new CellInfo(xi, yi);
-                    _cia[i++] = ci;
-                }
-
-                yi++;
-            }
-
-            xi++;
-        }
-    }
-
-    private String _tab = "";
-    public String toString(String tab) {
-        _tab = tab;
-        String rst = toString();
-        _tab = "";
-
-        return rst;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder tsb = new StringBuilder();
-        tsb.append(String.format("%sMapIndex: %d\n", _tab, _mi));
-        tsb.append(String.format("%sMapData: \n", _tab));
-        for (String ls : _tdm) {
-            tsb.append(String.format("%s%s%s\n", _tab, _tab, ls));
-        }
-
-        return tsb.toString();
-    }
-
 }
 
-
 final class CellInfo {
-    public CellInfo(int xi, int yi) {
-        // MainApp.println("###CellInfo");
-        _xi = xi;
-        _yi = yi;
+    public CellInfo(int i, int j) {
+        MainApp.println("##CellInfo#CellInfo >>> i: " + i + ", j: " + j);
     }
-
-    private int _xi;
-    public int get_xi() {
-        return _xi;
-    }
-    public void set_xi(int v) {
-        _xi = v;
-    }
-
-    private int _yi;
-    public int get_yi() {
-        return _yi;
-    }
-    public void set_yi(int v) {
-        _yi = v;
-    }
-
-    @Override
-    public String toString() {
-        return "xi: " + _xi + ", yi: " + _yi;
-    }
-
 }
 //#endregion

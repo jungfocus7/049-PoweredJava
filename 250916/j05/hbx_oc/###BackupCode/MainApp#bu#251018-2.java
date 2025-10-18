@@ -435,6 +435,7 @@ final class ShapeObject {
         for (int i = 0; i < l; i++) {
             String[] tdm = _tdma[i];
             ShapeMap spm = new ShapeMap(tdm, i);
+            // MainApp.println(spm.toString());
             _spma[i] = spm;
         }
 
@@ -460,21 +461,10 @@ final class ShapeObject {
     public int get_pix() {
         return _pix;
     }
-    public void set_pix(int i) {
-        _pix = i;
-    }
 
     private int _piy;
     public int get_piy() {
         return _piy;
-    }
-    public void set_piy(int i) {
-        _piy = i;
-    }
-
-    private int _ri;
-    public int get_ri() {
-        return _ri;
     }
 
 
@@ -534,22 +524,23 @@ final class ShapeMap {
         // MainApp.println("###ShapeMap##parseData");
 
         int len = getCellCount();
-        int i = 0;
+        int ia = 0;
         _cia = new CellInfo[len];
 
-        int xi = 0;
+        int ix = 0;
         for (String ls : _tdm) {
-            int yi = 0;
+            int iy = 0;
             for (char tc : ls.toCharArray()) {
                 if (tc == 'o') {
-                    CellInfo ci = new CellInfo(xi, yi);
-                    _cia[i++] = ci;
+                    CellInfo ci = new CellInfo(ix, iy);
+                    // MainApp.println(ci.toString());
+                    _cia[ia++] = ci;
                 }
 
-                yi++;
+                iy++;
             }
 
-            xi++;
+            ix++;
         }
     }
 
@@ -558,7 +549,6 @@ final class ShapeMap {
         _tab = tab;
         String rst = toString();
         _tab = "";
-
         return rst;
     }
 
@@ -578,31 +568,31 @@ final class ShapeMap {
 
 
 final class CellInfo {
-    public CellInfo(int xi, int yi) {
+    public CellInfo(int ix, int iy) {
         // MainApp.println("###CellInfo");
-        _xi = xi;
-        _yi = yi;
+        _ix = ix;
+        _iy = iy;
     }
 
-    private int _xi;
-    public int get_xi() {
-        return _xi;
+    private int _ix;
+    public int get_ix() {
+        return _ix;
     }
-    public void set_xi(int v) {
-        _xi = v;
+    public void set_ix(int v) {
+        _ix = v;
     }
 
-    private int _yi;
-    public int get_yi() {
-        return _yi;
+    private int _iy;
+    public int get_iy() {
+        return _iy;
     }
-    public void set_yi(int v) {
-        _yi = v;
+    public void set_iy(int v) {
+        _iy = v;
     }
 
     @Override
     public String toString() {
-        return "xi: " + _xi + ", yi: " + _yi;
+        return "ix: " + _ix + ", iy: " + _iy;
     }
 
 }

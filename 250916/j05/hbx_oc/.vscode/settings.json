@@ -6,6 +6,7 @@
     "java.debug.settings.onBuildFailureProceed": true,
     "java.debug.settings.console": "internalConsole",
     "java.configuration.updateBuildConfiguration": "interactive",
+    "java.format.settings.url": "eclipse-formatter.xml",
     // "files.exclude": {
     //     "**/.git": true,
     //     "**/.svn": true,

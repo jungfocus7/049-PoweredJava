@@ -8,6 +8,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -75,7 +76,6 @@ final class MainFrame extends JFrame {
      * MainFrame 생성자
      */
 	public MainFrame() {
-        // MainApp.println("###MainFrame");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Java Tetris");
 
@@ -144,7 +144,6 @@ final class RightPanel extends JPanel {
      * RightPanel 생성자
      */
     public RightPanel() {
-        // MainApp.println("###RightPanel");
         setBackground(_clprb);
         setLayout(null);
 
@@ -166,6 +165,7 @@ final class GameComponent extends JComponent {
     /**
      * ShapeMapArr
      */
+    @SuppressWarnings("unused")
     private static final ShapeObject[] _spos = ShapeObject.createAll();
 
     /**
@@ -320,125 +320,120 @@ final class ShapeObject {
                 },
             }),
 
-            new ShapeObject(2, new String[][] {
-                {
-                    "xxx",
-                    "ooo",
-                    "xox",
-                },
-                {
-                    "xox",
-                    "oox",
-                    "xox",
-                },
-                {
-                    "xxx",
-                    "xox",
-                    "ooo",
-                },
-                {
-                    "xox",
-                    "xoo",
-                    "xox",
-                },
-            }),
+            // new ShapeObject(2, new String[][] {
+            //     {
+            //         "xxx",
+            //         "ooo",
+            //         "xox",
+            //     },
+            //     {
+            //         "xox",
+            //         "oox",
+            //         "xox",
+            //     },
+            //     {
+            //         "xxx",
+            //         "xox",
+            //         "ooo",
+            //     },
+            //     {
+            //         "xox",
+            //         "xoo",
+            //         "xox",
+            //     },
+            // }),
 
-            new ShapeObject(3, new String[][] {
-                {
-                    "xxx",
-                    "ooo",
-                    "oxx",
-                },
-                {
-                    "oox",
-                    "xox",
-                    "xox",
-                },
-                {
-                    "xxx",
-                    "xxo",
-                    "ooo",
-                },
-                {
-                    "xox",
-                    "xox",
-                    "xoo",
-                },
-            }),
+            // new ShapeObject(3, new String[][] {
+            //     {
+            //         "xxx",
+            //         "ooo",
+            //         "oxx",
+            //     },
+            //     {
+            //         "oox",
+            //         "xox",
+            //         "xox",
+            //     },
+            //     {
+            //         "xxx",
+            //         "xxo",
+            //         "ooo",
+            //     },
+            //     {
+            //         "xox",
+            //         "xox",
+            //         "xoo",
+            //     },
+            // }),
 
-            new ShapeObject(4, new String[][] {
-                {
-                    "xxx",
-                    "ooo",
-                    "xxo",
-                },
-                {
-                    "xox",
-                    "xox",
-                    "oox",
-                },
-                {
-                    "xxx",
-                    "oxx",
-                    "ooo",
-                },
-                {
-                    "xoo",
-                    "xox",
-                    "xox",
-                },
-            }),
+            // new ShapeObject(4, new String[][] {
+            //     {
+            //         "xxx",
+            //         "ooo",
+            //         "xxo",
+            //     },
+            //     {
+            //         "xox",
+            //         "xox",
+            //         "oox",
+            //     },
+            //     {
+            //         "xxx",
+            //         "oxx",
+            //         "ooo",
+            //     },
+            //     {
+            //         "xoo",
+            //         "xox",
+            //         "xox",
+            //     },
+            // }),
 
-            new ShapeObject(5, new String[][] {
-                {
-                    "xxx",
-                    "xoo",
-                    "oox",
-                },
-                {
-                    "oxx",
-                    "oox",
-                    "xox",
-                },
-            }),
+            // new ShapeObject(5, new String[][] {
+            //     {
+            //         "xxx",
+            //         "xoo",
+            //         "oox",
+            //     },
+            //     {
+            //         "oxx",
+            //         "oox",
+            //         "xox",
+            //     },
+            // }),
 
-            new ShapeObject(6, new String[][] {
-                {
-                    "xxx",
-                    "oox",
-                    "xoo",
-                },
-                {
-                    "xxo",
-                    "xoo",
-                    "xox",
-                },
-            }),
+            // new ShapeObject(6, new String[][] {
+            //     {
+            //         "xxx",
+            //         "oox",
+            //         "xoo",
+            //     },
+            //     {
+            //         "xxo",
+            //         "xoo",
+            //         "xox",
+            //     },
+            // }),
 
-            new ShapeObject(7, new String[][] {
-                {
-                    "oo",
-                    "oo",
-                },
-            }),
+            // new ShapeObject(7, new String[][] {
+            //     {
+            //         "oo",
+            //         "oo",
+            //     },
+            // }),
 
         };
     }
 
     public ShapeObject(int tpn, String[][] tdma) {
-        // MainApp.println("###ShapeObject");
         _tpn = tpn;
-        _tdma = tdma;
 
-        int l = _tdma.length;
+        int l = tdma.length;
         _spma = new ShapeMap[l];
         for (int i = 0; i < l; i++) {
-            String[] tdm = _tdma[i];
-            ShapeMap spm = new ShapeMap(tdm, i);
-            _spma[i] = spm;
+            String[] tdm = tdma[i];
+            _spma[i] = new ShapeMap(tdm);
         }
-
-        MainApp.println(toString());
     }
 
     private int _tpn;
@@ -446,70 +441,23 @@ final class ShapeObject {
         return _tpn;
     }
 
-    private String[][] _tdma;
-    public String[][] get_tdma() {
-        return _tdma;
-    }
-
     private ShapeMap[] _spma;
     public ShapeMap[] get_spma() {
         return _spma;
-    }
-
-    private int _pix;
-    public int get_pix() {
-        return _pix;
-    }
-    public void set_pix(int i) {
-        _pix = i;
-    }
-
-    private int _piy;
-    public int get_piy() {
-        return _piy;
-    }
-    public void set_piy(int i) {
-        _piy = i;
-    }
-
-    private int _ri;
-    public int get_ri() {
-        return _ri;
-    }
-
-
-    @Override
-    public String toString() {
-        StringBuilder tsb = new StringBuilder();
-        tsb.append(String.format("TypeNum: %d\n", _tpn));
-        tsb.append("ShapeMaps: \n");
-        for (ShapeMap spm : _spma) {
-            tsb.append(String.format("%s", spm.toString("   ")));
-        }
-
-        return tsb.toString();
     }
 
 }
 
 
 final class ShapeMap {
-    public ShapeMap(String[] tdm, int mi) {
-        // println("###ShapeMap");
+    public ShapeMap(String[] tdm) {
         _tdm = tdm;
-        _mi = mi;
-
         parseData();
     }
 
     private String[] _tdm;
     public String[] get_tdm() {
         return _tdm;
-    }
-
-    private int _mi;
-    public int get_mi() {
-        return _mi;
     }
 
     private CellInfo[] _cia;
@@ -531,78 +479,104 @@ final class ShapeMap {
     }
 
     private void parseData() {
-        // MainApp.println("###ShapeMap##parseData");
+        MainApp.println("###ShapeMap##parseData");
+        MainApp.println(toString());
+        MainApp.println(">>> " + getCellCount());
 
         int len = getCellCount();
-        int i = 0;
+        int ia = 0;
         _cia = new CellInfo[len];
 
-        int xi = 0;
+        int ix = 0;
         for (String ls : _tdm) {
-            int yi = 0;
+            int iy = 0;
             for (char tc : ls.toCharArray()) {
                 if (tc == 'o') {
-                    CellInfo ci = new CellInfo(xi, yi);
-                    _cia[i++] = ci;
+                    _cia[ia++] = new CellInfo(ix, iy);
                 }
 
-                yi++;
+                iy++;
             }
 
-            xi++;
+            ix++;
         }
-    }
 
-    private String _tab = "";
-    public String toString(String tab) {
-        _tab = tab;
-        String rst = toString();
-        _tab = "";
+        MainApp.println(">>>>>>>>>>>>>>>> ");
 
-        return rst;
+        // int m = _tdm.length;
+        // for (int j = 0; j < m; j++) {
+        //     char[] tca = _tdm[j].toCharArray();
+        //     int l = tca.length;
+        //     for (int i = 0; i < l; i++) {
+        //         char tc = tca[i];
+        //         if (tc == 'o') {
+
+        //         }
+        //     }
+        // }
+
+        // ArrayList<CellInfo> lst = new ArrayList<CellInfo>();
+
+        // int m = _tdm.length;
+        // for (int j = 0; j < m; j++) {
+        //     String ds = _tdm[j];
+        //     MainApp.println("~~~~~~~~~ " + ds);
+
+        //     char[] mca = ds.toCharArray();
+        //     int l = mca.length;
+        //     for (int i = 0; i < l; i++) {
+        //         char mc = mca[i];
+        //         if (mc == 'o') {
+        //             // MainApp.println(":: " + mc + ", " + i + ", " + j + ", " + get_tpn());
+        //             // MainApp.println(":: " + mc + ", " + i + ", " + j);
+        //             // CellInfo ci = new CellInfo(i, j);
+        //             // _cis.add(ci);
+        //         }
+        //         //
+        //     }
+
+        //     if (j == 0) {
+        //         break;
+        //     }
+        // }
     }
 
     @Override
     public String toString() {
-        StringBuilder tsb = new StringBuilder();
-        tsb.append(String.format("%sMapIndex: %d\n", _tab, _mi));
-        tsb.append(String.format("%sMapData: \n", _tab));
-        for (String ls : _tdm) {
-            tsb.append(String.format("%s%s%s\n", _tab, _tab, ls));
-        }
-
-        return tsb.toString();
+        String rst = String.join(System.lineSeparator(), _tdm);
+        return rst;
     }
 
 }
 
 
 final class CellInfo {
-    public CellInfo(int xi, int yi) {
-        // MainApp.println("###CellInfo");
-        _xi = xi;
-        _yi = yi;
+    public CellInfo(int ix, int iy) {
+        // MainApp.println("###CellInfo##CellInfo");
+        _ix = ix;
+        _iy = iy;
+        MainApp.println(toString());
     }
 
-    private int _xi;
-    public int get_xi() {
-        return _xi;
+    private int _ix;
+    public int get_ix() {
+        return _ix;
     }
-    public void set_xi(int v) {
-        _xi = v;
+    public void set_ix(int v) {
+        _ix = v;
     }
 
-    private int _yi;
-    public int get_yi() {
-        return _yi;
+    private int _iy;
+    public int get_iy() {
+        return _iy;
     }
-    public void set_yi(int v) {
-        _yi = v;
+    public void set_iy(int v) {
+        _iy = v;
     }
 
     @Override
     public String toString() {
-        return "xi: " + _xi + ", yi: " + _yi;
+        return "ix: " + _ix + ", iy: " + _iy;
     }
 
 }
