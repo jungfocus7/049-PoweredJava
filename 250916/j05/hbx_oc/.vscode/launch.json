@@ -8,15 +8,8 @@
             "type": "java",
             "name": "MainApp",
             "request": "launch",
-            "mainClass": "MainApp",
+            "mainClass": "hbgms.MainApp",
             "projectName": "hbx_oc_10cd1a9e"
-        },
-        {
-            "type": "java",
-            "name": "MainApp",
-            "request": "launch",
-            "mainClass": "MainApp",
-            "projectName": "hbx_oc_efe35179"
         },
         {
             "type": "java",
