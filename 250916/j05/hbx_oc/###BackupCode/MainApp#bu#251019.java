@@ -492,6 +492,8 @@ final class ShapeObject {
             _spma[i] = spm;
         }
 
+        init_lxly();
+
         // if (_tpn == 1) {
         //     MainApp.println(toString());
         //     MainApp.println("_lx: " + _lx + ", _ly: " + _ly);
@@ -514,6 +516,52 @@ final class ShapeObject {
         return _spma;
     }
 
+    // private int _ex;
+    // public int get_ex() {
+    //     return _ex;
+    // }
+
+    // private int _ey;
+    // public int get_ey() {
+    //     return _ey;
+    // }
+
+    private void init_lxly() {
+        /*String[] txa = _spma[0].get_tdm();
+        int mlx = txa[0].length();
+        int mly = txa.length;
+        int glx = GameComponent.get_colcnt(0);
+        int gly = GameComponent.get_rowcnt(0);
+        _ex = (glx - mlx) + 1;
+        _ey = (gly - mly) + 1;
+        */
+        // _ex = 9;
+    }
+
+    public int get_ex(int an) {
+        return 0;
+    }
+
+    public int get_ey(int an) {
+        return 0;
+    }
+
+    private int _xi;
+    public int get_xi() {
+        return _xi;
+    }
+    // public void set_xi(int i) {
+    //     _xi = i;
+    // }
+
+    private int _yi;
+    public int get_yi() {
+        return _yi;
+    }
+    // public void set_yi(int i) {
+    //     _yi = i;
+    // }
+
     private int _mi;
     public int get_mi() {
         return _mi;
@@ -528,26 +576,6 @@ final class ShapeObject {
             }
         }
         _mi = i;
-    }
-
-    public int get_ex(int an) {
-        // ShapeMap spm = _spma[_mi];
-        // spm.
-        return 0;
-    }
-
-    public int get_ey(int an) {
-        return 0;
-    }
-
-    private int _xi;
-    public int get_xi() {
-        return _xi;
-    }
-
-    private int _yi;
-    public int get_yi() {
-        return _yi;
     }
 
     public ShapeMap get_cspm() {
@@ -617,7 +645,6 @@ final class ShapeMap {
         _mi = mi;
 
         parseData();
-        init_sieis();
     }
 
     /**
@@ -679,37 +706,6 @@ final class ShapeMap {
             xi++;
         }
     }
-
-    private int _xsi;
-    public int get_xsi() {
-        return _xsi;
-    }
-
-    private int _xei;
-    public int get_xei() {
-        return _xei;
-    }
-
-    private int _ysi;
-    public int get_ysi() {
-        return _ysi;
-    }
-
-    private int _yei;
-    public int get_yei() {
-        return _yei;
-    }
-
-    private void init_sieis() {
-        // MainApp.println(">>> " + toString());
-        for (CellInfo ci : _cia) {
-            int xi = ci.get_xi();
-            if (xi < _xsi)
-            _xsi = ci.get_xi();
-            // ci.
-        }
-    }
-
 
     private String _tab = "";
     public String toString(String tab) {
