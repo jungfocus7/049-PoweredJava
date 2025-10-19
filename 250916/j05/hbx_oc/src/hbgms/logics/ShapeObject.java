@@ -135,7 +135,10 @@ public final class ShapeObject {
             _spma[i] = spm;
         }
 
+        // _sx = 0;
         _ex = GameComponent.get_colc(-get_cspm().get_colc());
+        // _sy = -get_cspm().get_rowc();
+        // _sy = -get_cspm().get_ey();
         _ey = GameComponent.get_rowc(-get_cspm().get_rowc());
     }
 
@@ -244,6 +247,7 @@ public final class ShapeObject {
     public void moveUp() {
         int i = _yi - 1;
         int sy = get_cspm().get_sy();
+        // int sy = _sy;
         if (i < sy) {
             i = sy;
         }
@@ -259,21 +263,35 @@ public final class ShapeObject {
         _yi = i;
     }
 
+    private void check_xiyi() {
+        int sx = get_cspm().get_sx();
+        int ex = get_cspm().get_ex();
+        if (_xi < sx) {
+            _xi = sx;
+        } else if (_xi > ex) {
+            _xi = ex;
+        }
+
+        int sy = get_cspm().get_sy();
+        int ey = get_cspm().get_ey();
+        if (_yi < sy) {
+            _yi = sy;
+        } else if (_yi > ey) {
+            _yi = ey;
+        }
+    }
+
     public void rotate() {
         int l = _spma.length;
         _mi = (_mi + 1) % l;
-
-        // int xi = _xi;
-        // int sx = get_cspm().get_sx();
-        // if (xi < sx) {
-        //     xi = sx;
-        // }
-        // _xi = xi;
+        check_xiyi();
     }
 
     public void reset() {
-        _xi = 0;
+        // _xi = 0;
         _yi = 0;
+        _xi = (GameComponent.get_colc(0) / 2) - (int)Math.ceil(get_cspm().get_colc() / 2.0);
+        // _yi = -get_cspm().get_rowc();
         _mi = 0;
     }
 

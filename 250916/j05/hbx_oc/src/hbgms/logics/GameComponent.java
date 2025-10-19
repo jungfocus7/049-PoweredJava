@@ -156,18 +156,18 @@ public final class GameComponent extends JComponent {
      */
     private void drawShape(Graphics tg) {
         ShapeMap spm = get_cspo().get_cspm();
-        // tg.setColor(Color.green);
-        // for (int l = spm.get_colc(), i = 0; i < l; i++) {
-        //     for (int m = spm.get_rowc(), j = 0; j < m; j++) {
-        //         int xi = get_cspo().get_xi() + i;
-        //         int yi = get_cspo().get_yi() + j;
-        //         int tx = (get_celw(1) * xi) + 1;
-        //         int ty = (get_celh(1) * yi) + 1;
-        //         int tw = get_celw(0);
-        //         int th = get_celh(0);
-        //         tg.fillRect(tx, ty, tw, th);
-        //     }
-        // }
+        tg.setColor(Color.green);
+        for (int l = spm.get_colc(), i = 0; i < l; i++) {
+            for (int m = spm.get_rowc(), j = 0; j < m; j++) {
+                int xi = get_cspo().get_xi() + i;
+                int yi = get_cspo().get_yi() + j;
+                int tx = (get_celw(1) * xi) + 1;
+                int ty = (get_celh(1) * yi) + 1;
+                int tw = get_celw(0);
+                int th = get_celh(0);
+                tg.fillRect(tx, ty, tw, th);
+            }
+        }
 
         tg.setColor(Color.white);
         for (CellInfo ci : spm.get_cia()) {
