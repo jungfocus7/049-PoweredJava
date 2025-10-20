@@ -9,6 +9,13 @@
             "name": "MainApp",
             "request": "launch",
             "mainClass": "hbgms.MainApp",
+            "projectName": "hbx_oc_efe35179"
+        },
+        {
+            "type": "java",
+            "name": "MainApp",
+            "request": "launch",
+            "mainClass": "hbgms.MainApp",
             "projectName": "hbx_oc_10cd1a9e"
         },
         {

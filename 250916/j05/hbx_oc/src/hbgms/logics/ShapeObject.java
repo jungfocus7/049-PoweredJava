@@ -1,5 +1,8 @@
 package hbgms.logics;
 
+import hbgms.MainApp;
+import hbgms.hbgms.models.IndexRanger;
+
 
 public final class ShapeObject {
     public static ShapeObject[] createAll() {
@@ -121,6 +124,56 @@ public final class ShapeObject {
                 },
             }),
 
+            // new ShapeObject(7, new String[][] {
+            //     {
+            //         "xxxoxxx",
+            //         "xxxoxxx",
+            //         "xxxoxxx",
+            //         "xooooox",
+            //         "xxxoxxx",
+            //         "xxxoxxx",
+            //         "xxxoxxx",
+            //     },
+            //     {
+            //         "xxxxxxx",
+            //         "xxxoxxx",
+            //         "xxxoxxx",
+            //         "ooooooo",
+            //         "xxxoxxx",
+            //         "xxxoxxx",
+            //         "xxxxxxx",
+            //     },
+            // }),
+
+            // new ShapeObject(8, new String[][] {
+            //     {
+            //         "oxxxxxx",
+            //         "xoxxxxx",
+            //         "xxoxxxx",
+            //         "xxxoxxx",
+            //         "xxxxoxx",
+            //         "xxxxoxx",
+            //         "xxxxoxx",
+            //     },
+            //     {
+            //         "xxoxxxx",
+            //         "xxoxxxx",
+            //         "xxoxxxx",
+            //         "xxxoxxx",
+            //         "xxxxoxx",
+            //         "xxxxxox",
+            //         "xxxxxxo",
+            //     },
+            // }),
+
+            new ShapeObject(8, new String[][] {
+                {
+                    "xxx",
+                    "xox",
+                    "xxx",
+                },
+            }),
+
         };
     }
 
@@ -135,11 +188,7 @@ public final class ShapeObject {
             _spma[i] = spm;
         }
 
-        // _sx = 0;
-        _ex = GameComponent.get_colc(-get_cspm().get_colc());
-        // _sy = -get_cspm().get_rowc();
-        // _sy = -get_cspm().get_ey();
-        _ey = GameComponent.get_rowc(-get_cspm().get_rowc());
+        _idr = GameComponent.create_idr(get_cspm());
     }
 
     private int _tpn;
@@ -170,57 +219,77 @@ public final class ShapeObject {
         }
     }
 
+    /**
+     * CurrentShapeMap
+     * @return
+     */
     public ShapeMap get_cspm() {
         ShapeMap spm = _spma[_mi];
         return spm;
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    /**
-     * _xi가 이동 가능한 시작점
-     */
-    private int _sx;
-    public int get_sx() {
-        return _sx;
+    private IndexRanger _idr;
+    public IndexRanger get_idr() {
+        return _idr;
     }
 
     /**
-     * _xi가 이동 가능한 끝점
+     * X Index Start
      */
-    private int _ex;
-    public int get_ex() {
-        return _ex;
+    public int get_xs() {
+        return _idr.get_xs();
     }
 
     /**
-     * _yi가 이동 가능한 시작점
+     * X Index End
      */
-    private int _sy;
-    public int get_sy() {
-        return _sy;
+    public int get_xe() {
+        return _idr.get_xe();
     }
 
     /**
-     * _yi가 이동 가능한 끝점
+     * X Index Current
      */
-    private int _ey;
-    public int get_ey() {
-        return _ey;
+    public int get_xc() {
+        return _idr.get_xc();
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     /**
+     * Y Index Start
+     */
+    public int get_ys() {
+        return _idr.get_ys();
+    }
+
+    /**
+     * Y Index End
+     */
+    public int get_ye() {
+        return _idr.get_ye();
+    }
+
+    /**
+     * Y Index Current
+     */
+    public int get_yc() {
+        return _idr.get_yc();
+    }
+
+    //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    private int _xi;
+    /**
      * 현재 x점
      */
-    private int _xi;
     public int get_xi() {
         return _xi;
     }
 
+    private int _yi;
     /**
      * 현재 y점
      */
-    private int _yi;
     public int get_yi() {
         return _yi;
     }
@@ -228,56 +297,59 @@ public final class ShapeObject {
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public void moveLeft() {
         int i = _xi - 1;
-        int sx = get_cspm().get_sx();
-        if (i < sx) {
-            i = sx;
+        int xs = get_cspm().get_pxs(0);
+        if (i < xs) {
+            i = xs;
         }
         _xi = i;
     }
 
     public void moveRight() {
         int i = _xi + 1;
-        int ex = get_cspm().get_ex();
-        if (i > ex) {
-            i = ex;
+        int xe = get_cspm().get_pxe(0);
+        if (i > xe) {
+            i = xe;
         }
         _xi = i;
     }
 
     public void moveUp() {
         int i = _yi - 1;
-        int sy = get_cspm().get_sy();
-        // int sy = _sy;
-        if (i < sy) {
-            i = sy;
+        // int ys = get_cspm().get_ys(0);
+        int ys = get_cspm().get_lup();
+        if (i < ys) {
+            i = ys;
         }
         _yi = i;
+        MainApp.println(">>> " + ys);
+        MainApp.println(">>> " + _yi);
     }
 
     public void moveDown() {
         int i = _yi + 1;
-        int ey = get_cspm().get_ey();
-        if (i > ey) {
-            i = ey;
+        int ye = get_cspm().get_pye(0);
+        if (i > ye) {
+            i = ye;
         }
         _yi = i;
     }
 
     private void check_xiyi() {
-        int sx = get_cspm().get_sx();
-        int ex = get_cspm().get_ex();
-        if (_xi < sx) {
-            _xi = sx;
-        } else if (_xi > ex) {
-            _xi = ex;
+        int xs = get_cspm().get_pxs(0);
+        int xe = get_cspm().get_pxe(0);
+        if (_xi < xs) {
+            _xi = xs;
+        } else if (_xi > xe) {
+            _xi = xe;
         }
 
-        int sy = get_cspm().get_sy();
-        int ey = get_cspm().get_ey();
-        if (_yi < sy) {
-            _yi = sy;
-        } else if (_yi > ey) {
-            _yi = ey;
+        // int ys = get_cspm().get_pys(0);
+        int ys = get_cspm().get_lup();
+        int ye = get_cspm().get_pye(0);
+        if (_yi < ys) {
+            _yi = ys;
+        } else if (_yi > ye) {
+            _yi = ye;
         }
     }
 
@@ -289,9 +361,10 @@ public final class ShapeObject {
 
     public void reset() {
         // _xi = 0;
-        _yi = 0;
-        _xi = (GameComponent.get_colc(0) / 2) - (int)Math.ceil(get_cspm().get_colc() / 2.0);
-        // _yi = -get_cspm().get_rowc();
+        // _yi = 0;
+        _xi = get_cspm().get_ctp();
+        // _yi = get_cspm().get_lup();
+        _yi = -get_cspm().get_yis(0);
         _mi = 0;
     }
 

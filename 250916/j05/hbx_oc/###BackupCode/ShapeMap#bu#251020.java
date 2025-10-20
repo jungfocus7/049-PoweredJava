@@ -90,54 +90,23 @@ public final class ShapeMap {
     /**
      * ColumnCount
      */
-    public int get_colc(int an) {
-        return _colc + an;
+    public int get_colc() {
+        return _colc;
     }
 
     private int _rowc;
     /**
      * RowCount
      */
-    public int get_rowc(int an) {
-        return _rowc + an;
+    public int get_rowc() {
+        return _rowc;
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    private int _xis;
-    /**
-     * Cell X Index Start
-     * @return
-     */
-    public int get_xis(int an) {
-        return _xis + an;
-    }
-
-    private int _xie;
-    /**
-     * Cell X Index End
-     * @return
-     */
-    public int get_xie(int an) {
-        return _xie + an;
-    }
-
-    private int _yis;
-    /**
-     * Cell Y Index Start
-     * @return
-     */
-    public int get_yis(int an) {
-        return _yis + an;
-    }
-
-    private int _yie;
-    /**
-     * Cell Y Index End
-     * @return
-     */
-    public int get_yie(int an) {
-        return _yie + an;
-    }
+    private int _xs;
+    private int _xe;
+    private int _ys;
+    private int _ye;
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     private int _pxs;
@@ -145,8 +114,8 @@ public final class ShapeMap {
      * Point X-Start
      * @return
      */
-    public int get_pxs(int an) {
-        return _pxs + an;
+    public int get_pxs() {
+        return _pxs;
     }
 
     private int _pxe;
@@ -154,8 +123,8 @@ public final class ShapeMap {
      * Point X-End
      * @return
      */
-    public int get_pxe(int an) {
-        return _pxe + an;
+    public int get_pxe() {
+        return _pxe;
     }
 
     private int _pys;
@@ -163,8 +132,8 @@ public final class ShapeMap {
      * Point Y-Start
      * @return
      */
-    public int get_pys(int an) {
-        return _pys + an;
+    public int get_pys() {
+        return _pys;
     }
 
     private int _pye;
@@ -172,8 +141,8 @@ public final class ShapeMap {
      * Point Y-End
      * @return
      */
-    public int get_pye(int an) {
-        return _pye + an;
+    public int get_pye() {
+        return _pye;
     }
 
     /**
@@ -181,43 +150,36 @@ public final class ShapeMap {
      */
     private void initBoundary() {
         boolean bf = true;
+        int xs = 0, xe = 0;
+        int ys = 0, ye = 0;
 
         for (CellInfo ci : _cia) {
             int xi = ci.get_xi();
             int yi = ci.get_yi();
             if (bf) {
-                _xis = _xie = xi;
-                _yis = _yie = yi;
+                xs = xe = xi;
+                ys = ye = yi;
                 bf = false;
             } else {
-                if (xi < _xis) {
-                    _xis = xi;
+                if (xi < xs) {
+                    xs = xi;
                 }
-                if (yi < _yis) {
-                    _yis = yi;
+                if (yi < ys) {
+                    ys = yi;
                 }
-                if (xi > _xie) {
-                    _xie = xi;
+                if (xi > xe) {
+                    xe = xi;
                 }
-                if (yi > _yie) {
-                    _yie = yi;
+                if (yi > ye) {
+                    ye = yi;
                 }
             }
         }
 
-        _pxs = 0 - _xis;
-        _pxe = GameComponent.get_colc(-(_xie + 1));
-
-        _pys = 0 - _yis;
-        _pye = GameComponent.get_rowc(-(_yie + 1));
-    }
-
-    public int get_lup() {
-        return -get_yie(1);
-    }
-
-    public int get_ctp() {
-        return (GameComponent.get_colc(0) / 2) - (int)Math.ceil(get_colc(0) / 2.0);
+        _pxs = 0 - xs;
+        _pxe = GameComponent.get_colc(-(xe + 1));
+        _pys = 0 - ys;
+        _pye = GameComponent.get_rowc(-(ye + 1));
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

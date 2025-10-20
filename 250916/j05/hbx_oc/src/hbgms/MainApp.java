@@ -2,7 +2,7 @@ package hbgms;
 
 import javax.swing.SwingUtilities;
 
-import hbgms.logics.CellInfo;
+import hbgms.hbgms.models.CellInfo;
 
 
 public final class MainApp {
@@ -55,4 +55,3 @@ public final class MainApp {
     }
 
 }
-

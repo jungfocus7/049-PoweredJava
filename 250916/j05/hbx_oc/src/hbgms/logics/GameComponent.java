@@ -14,6 +14,8 @@ import javax.swing.SwingUtilities;
 
 import hbgms.MainApp;
 import hbgms.RightPanel;
+import hbgms.hbgms.models.CellInfo;
+import hbgms.hbgms.models.IndexRanger;
 
 
 public final class GameComponent extends JComponent {
@@ -42,33 +44,74 @@ public final class GameComponent extends JComponent {
 
 
     private static final int _celw = 27;
+    /**
+     * CellWidth
+     * @param an
+     * @return
+     */
     public static int get_celw(int an) {
         return _celw + an;
     }
 
     private static final int _celh = 27;
+    /**
+     * CellHeight
+     * @param an
+     * @return
+     */
     public static int get_celh(int an) {
         return _celh + an;
     }
 
     private static final int _colc = 10;
+    /**
+     * ColumnCount
+     * @param an
+     * @return
+     */
     public static int get_colc(int an) {
         return _colc + an;
     }
 
     private static final int _rowc = 20;
+    /**
+     * RowCount
+     * @param an
+     * @return
+     */
     public static int get_rowc(int an) {
         return _rowc + an;
     }
 
     private static final int _grdw = get_celw(1) * _colc;
+    /**
+     * GroundWidth
+     * @param an
+     * @return
+     */
     public static int get_grdw(int an) {
         return _grdw + an;
     }
 
     private static final int _grdh = get_celh(1) * _rowc;
+    /**
+     * GroundHeight
+     * @param an
+     * @return
+     */
     public static int get_grdh(int an) {
         return _grdh + an;
+    }
+
+    /**
+     * CreateIndexRanger
+     * @param spm
+     * @return
+     */
+    public static IndexRanger create_idr(ShapeMap spm) {
+        return new IndexRanger(
+            0, get_colc(1 - spm.get_colc(0)),
+            0, get_rowc(1 - spm.get_rowc(0)));
     }
 
 
@@ -151,21 +194,25 @@ public final class GameComponent extends JComponent {
         tg.drawImage(_bfimg, 0, 0, this);
     }
 
+    private boolean _bdbg = true;
     /**
      * CurrentShapeObjectDraw
      */
     private void drawShape(Graphics tg) {
         ShapeMap spm = get_cspo().get_cspm();
-        tg.setColor(Color.green);
-        for (int l = spm.get_colc(), i = 0; i < l; i++) {
-            for (int m = spm.get_rowc(), j = 0; j < m; j++) {
-                int xi = get_cspo().get_xi() + i;
-                int yi = get_cspo().get_yi() + j;
-                int tx = (get_celw(1) * xi) + 1;
-                int ty = (get_celh(1) * yi) + 1;
-                int tw = get_celw(0);
-                int th = get_celh(0);
-                tg.fillRect(tx, ty, tw, th);
+
+        if (_bdbg) {
+            tg.setColor(Color.green);
+            for (int l = spm.get_colc(0), i = 0; i < l; i++) {
+                for (int m = spm.get_rowc(0), j = 0; j < m; j++) {
+                    int xi = get_cspo().get_xi() + i;
+                    int yi = get_cspo().get_yi() + j;
+                    int tx = (get_celw(1) * xi) + 1;
+                    int ty = (get_celh(1) * yi) + 1;
+                    int tw = get_celw(0);
+                    int th = get_celh(0);
+                    tg.fillRect(tx, ty, tw, th);
+                }
             }
         }
 

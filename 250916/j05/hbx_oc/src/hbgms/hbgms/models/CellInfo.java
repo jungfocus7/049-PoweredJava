@@ -1,4 +1,4 @@
-package hbgms.logics;
+package hbgms.hbgms.models;
 
 
 public final class CellInfo {
