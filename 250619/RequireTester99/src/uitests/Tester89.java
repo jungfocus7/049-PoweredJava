@@ -339,7 +339,7 @@ final class ShapeMap {
                 }
             }
         }
-
+/*
         _sx = 0 - sx;
         _ex = GameComponent.get_colc(-(ex + 1));
         _sy = 0 - sy;
@@ -356,7 +356,7 @@ final class ShapeMap {
         	Tester89.println("_sy: " + _sy);
         	Tester89.println("_ey: " + _ey);
         	Tester89.println("===========");
-        }
+        }*/
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
