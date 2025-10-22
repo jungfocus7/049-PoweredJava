@@ -55,6 +55,30 @@ final class GameLevelInfo {
 
 }
 final class GameWorker implements ActionListener {
+	/**
+	 * GameState - stop
+	 */
+	public static final int gst_stop = 0;
+
+	/**
+	 * GameState - start
+	 */
+	public static final int gst_start = 1;
+
+	/**
+	 * GameState - resume
+	 */
+	public static final int gst_resume = 2;
+
+	/**
+	 * GameState - pause
+	 */
+	public static final int gst_pause = 3;
+
+
+	/**
+	 * GameWorker 생성자
+	 */
 	public GameWorker() {
 		_adq = new ArrayDeque<ShapeObject>(3);
 //		_adq.clear();
@@ -85,23 +109,60 @@ final class GameWorker implements ActionListener {
 	private Random _rnd;
 	private int _ix;
 
+	private ShapeObject _cspo;
+	public ShapeObject get_cspo() {
+		return _cspo;
+	}
+
 	private Timer _tmr;
 
 	private GameLevelInfo[] _glia;
+	private int _iy;
+
+	private int _gst;
 
 
 	@Override
 	public void actionPerformed(ActionEvent te) {
+	}
 
+
+	public ShapeObject nextShape() {
+//		_rnd.nextInt(_adq)
+		return _cspo;
 	}
 
 
 	public void stop() {
+		if (_gst == gst_stop) {
+			return;
+		}
 
+		_gst = gst_stop;
 	}
 
 	public void start() {
+		if (_gst == gst_start) {
+			return;
+		}
 
+		_gst = gst_start;
+	}
+
+	public void resume() {
+		if (_gst == gst_resume) {
+			return;
+		}
+
+		_gst = gst_resume;
+	}
+
+	public void pause() {
+		if (_gst == gst_pause) {
+			return;
+		}
+
+		_gst = gst_pause;
 	}
 
 }
