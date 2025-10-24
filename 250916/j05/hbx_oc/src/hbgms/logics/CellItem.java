@@ -1,13 +1,13 @@
-package hbgms.hbgms.models;
+package hbgms.logics;
 
 
-public final class CellInfo {
+public final class CellItem {
     /**
-     * CellInfo 생성자
+     * CellItem 생성자
      * @param xi X방향 Index
      * @param yi Y방향 Index
      */
-    public CellInfo(int xi, int yi) {
+    public CellItem(int xi, int yi) {
         _xi = xi;
         _yi = yi;
     }

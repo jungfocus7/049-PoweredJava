@@ -1,30 +1,25 @@
 package hbgms;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import hbgms.helpers.*;
+import hbgms.uicomps.*;
 
 
 public final class MainFrame extends JFrame {
-    /**
-     * ColorMainFrame
-     */
-    private static final Color _clmf = Color.black;
+    public static void main(String[] args) throws Exception {
+        MainHelper.trace("###MainApp##main");
 
-    /**
-     * ColorPanelLeft
-     */
-    private static final Color _clpl = new Color(0x997755);
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                MainHelper.create_mfrm();
+            }
+        });
+    }
 
 
-    /**
-     * MainFrame 생성자
-     */
 	public MainFrame() {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Java Tetris");
@@ -36,39 +31,46 @@ public final class MainFrame extends JFrame {
 		setResizable(false);
 		setMinimumSize(getSize());
 		// setVisible(true);
+
+        addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent te) {
+                _pnlRight.get_gameArea().keyPressed(te);
+            }
+        });
 	}
 
 	private JPanel _pnlRootCont;
-	private JPanel _pnlLeft;
+    public JPanel getRootPanel() {
+        return _pnlRootCont;
+    }
+
+	private LeftPanel _pnlLeft;
+    public LeftPanel getLeftPanel() {
+        return _pnlLeft;
+    }
+
 	private RightPanel _pnlRight;
     public RightPanel getRightPanel() {
         return _pnlRight;
     }
 
+
 	private void initComponents() {
 		_pnlRootCont = (JPanel)getContentPane();
-        _pnlRootCont.setBackground(_clmf);
+        _pnlRootCont.setBackground(GameConfig.clmfb);
 		_pnlRootCont.setPreferredSize(new Dimension(470, 630));
 
 		_pnlRootCont.setLayout(new BorderLayout(4, 2));
-		_pnlLeft = new JPanel();
-		_pnlLeft.setBackground(_clpl);
-		_pnlLeft.setPreferredSize(new Dimension(150, 0));
+		_pnlLeft = new LeftPanel();
 		_pnlRootCont.add(_pnlLeft, BorderLayout.WEST);
 
 		_pnlRight = new RightPanel();
 		_pnlRootCont.add(_pnlRight, BorderLayout.CENTER);
 	}
 
-    public void open() {
-        addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent te) {
-                // MainApp.println(">>> " + te);
-                _pnlRight.get_gameComp().keyPressed(te);
-            }
-        });
 
+    public void open() {
         setVisible(true);
         requestFocusInWindow();
     }

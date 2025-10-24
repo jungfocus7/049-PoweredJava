@@ -6,10 +6,10 @@
     "configurations": [
         {
             "type": "java",
-            "name": "MainApp",
+            "name": "MainFrame",
             "request": "launch",
-            "mainClass": "hbgms.MainApp",
-            "projectName": "hbx_oc_efe35179"
+            "mainClass": "hbgms.MainFrame",
+            "projectName": "hbx_oc_10cd1a9e"
         },
         {
             "type": "java",

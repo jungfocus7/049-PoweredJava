@@ -1,7 +1,7 @@
 package hbgms.logics;
 
-import hbgms.hbgms.models.CellInfo;
-import hbgms.helpers.StringHelper;
+import hbgms.*;
+import hbgms.helpers.*;
 
 
 public final class ShapeMap {
@@ -33,10 +33,10 @@ public final class ShapeMap {
     }
 
     /**
-     * CellInfoArr
+     * CellItemArr
      */
-    private CellInfo[] _cia;
-    public CellInfo[] get_cia() {
+    private CellItem[] _cia;
+    public CellItem[] get_cia() {
         return _cia;
     }
 
@@ -62,14 +62,14 @@ public final class ShapeMap {
     private void parseData() {
         int l = getCellCount();
         int i = 0;
-        _cia = new CellInfo[l];
+        _cia = new CellItem[l];
 
         int yi = 0;
         for (String ls : _tdm) {
             int xi = 0;
             for (char tc : ls.toCharArray()) {
                 if (tc == 'o') {
-                    CellInfo ci = new CellInfo(xi, yi);
+                    CellItem ci = new CellItem(xi, yi);
                     _cia[i++] = ci;
                 }
 
@@ -182,7 +182,7 @@ public final class ShapeMap {
     private void initBoundary() {
         boolean bf = true;
 
-        for (CellInfo ci : _cia) {
+        for (CellItem ci : _cia) {
             int xi = ci.get_xi();
             int yi = ci.get_yi();
             if (bf) {
@@ -206,10 +206,10 @@ public final class ShapeMap {
         }
 
         _pxs = 0 - _xis;
-        _pxe = GameComponent.get_colc(-(_xie + 1));
+        _pxe = GameConfig.get_colc(-(_xie + 1));
 
         _pys = 0 - _yis;
-        _pye = GameComponent.get_rowc(-(_yie + 1));
+        _pye = GameConfig.get_rowc(-(_yie + 1));
     }
 
     public int get_lup() {
@@ -217,7 +217,7 @@ public final class ShapeMap {
     }
 
     public int get_ctp() {
-        return (GameComponent.get_colc(0) / 2) - (int)Math.ceil(get_colc(0) / 2.0);
+        return (GameConfig.get_colc(0) / 2) - (int)Math.ceil(get_colc(0) / 2.0);
     }
 
     //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

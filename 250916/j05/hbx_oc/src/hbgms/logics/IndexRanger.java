@@ -1,4 +1,4 @@
-package hbgms.hbgms.models;
+package hbgms.logics;
 
 
 public final class IndexRanger {
@@ -12,13 +12,11 @@ public final class IndexRanger {
 	public IndexRanger(int xs, int xl, int ys, int yl) {
 		_xs = xs;
 		_xl = (xl < 1) ? 1 : xl;
-//		_xe = _xs + ((xl > 1) ? (xl - 1) : xl); // uint경우
 		_xe = (_xs - 1) + _xl;
 		_xc = _xs;
 
 		_ys = ys;
 		_yl = (yl < 1) ? 1 : yl;
-//		_ye = _ys + ((yl > 1) ? (yl - 1) : yl); // uint경우
 		_ye = (_ys - 1) + _yl;
 		_yc = _ys;
 	}
