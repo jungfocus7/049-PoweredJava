@@ -55,7 +55,7 @@ public final class StringHelper {
 	 * @param str 문자열
 	 * @return
 	 */
-	public static boolean isNullOrWhitespace(String str) {
+	public static boolean isNullOrWhiteSpace(String str) {
 		if (str == null) {
 			return true;
 		}
@@ -79,7 +79,7 @@ public final class StringHelper {
 	 * @return
 	 */
 	public static boolean isNotNullOrWhiteSpace(String str) {
-		return isNullOrWhitespace(str) == false;
+		return isNullOrWhiteSpace(str) == false;
 	}
 
 	/**

@@ -214,7 +214,7 @@ final class RightPanel extends JPanel implements MouseListener, MouseMotionListe
     	drawRect(g2);
     }
 
-    private final SmoothMove _smm = new SmoothMove(0.0, 0.1);
+    private final SmoothMove _smm = new SmoothMove(0.0, 0.02);
     private final Rectangle2D.Double _rct = new Rectangle2D.Double(10, 10, 100, 100);
     private void drawRect(Graphics2D g2) {
     	g2.setColor(Color.red);
